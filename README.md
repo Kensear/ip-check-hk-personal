@@ -82,7 +82,7 @@ H = Home; B = Business
 |HKBN (ctinets.com)|AS10103|H|
 |HKBN Enterprise <sup>1</sup>|AS9381|B|
 |HGC|AS9304|H/B|
-|JUCC (University Only) <sup>2</sup><br>(including downstream ISPs for each institution|AS3662|B|
+|JUCC (University Only) <sup>2</sup><br>|AS3662|B|
 
 Notes:
 1. Incorrectly labelled as **"Hosting"** (and even **VPN**) Type on IPinfo even if only used in normal WiFi, but I **failed the appeal (rejected)** (I contacted it before) due to its previous **mass port scanning** evidence (in its email reply).
