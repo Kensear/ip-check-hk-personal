@@ -1,14 +1,16 @@
-# IP Quality & Stream Restriction Checker
+# IP Quality & Stream Restriction Checker (HK)
 
 **IP Quality &amp; Streaming Website Regional Restriction Checker (Hong Kong Region Only)**
 
+Language/语言: [繁體中文](./README_zh_HK.md) [简体中文](./README_zh_CN.md)
+
 Disclaimer:
 - For personal research🔬 only (apart from just a developer, I am also a researcher!).
-- This project is not affiliated with any local ISPs or websites.
+- This project is affiliated with neither any local ISP nor any website stated.
 
 This was made originally due to an **argument** with the original author about Netflix module.
 
-<img width="520" alt="Screenshot 2025-04-16 at 4 59 19 PM" src="https://github.com/user-attachments/assets/c26aaf26-9435-43b9-ac4d-2d7f4b49314c" />
+<img width="520" alt="Screenshot 2025-04-16 at 4 59 19 PM" src="https://github.com/user-attachments/assets/c26aaf26-9435-43b9-ac4d-2d7f4b49314c" /><br>
 
 **My Personality:**<br>
 If my suggestion/PR is rejected by a repo, fork (copy) it ASAP and modify it with my unique suggestions for **personal use**.<br>
@@ -23,7 +25,7 @@ As a Hong Kong university student, I **only** use nodes in **Hong Kong region** 
 Switching among different **regions** very frequently may lead to critical login security alerts or even account ban.
 
 **Note:**
-Spotify Registration module may not give an accurate result on **iOS (iSH app)** and under poor Internet conditions, since it detects proxy based on the **latency**.
+Spotify Registration module may not give an accurate result under poor Internet conditions since it also detects proxy based on the **latency**.
 
 ## Running
 
@@ -34,15 +36,15 @@ It's **not recommended** to run the same type of script (Check IP or Stream) man
 Test IP Quality:
 ```
 # Choose one based on your device/emulator.
-python ./chkip.py
 python3 ./chkip.py
+python ./chkip.py
 ```
 
 Test Streaming/Local Websites:
 ```
 # Choose one based on your device/emulator.
-python ./chkstream.py
 python3 ./chkstream.py
+python ./chkstream.py
 ```
 
 ## New Features
@@ -72,17 +74,18 @@ Whether from Residential IP providers or real local network (like WiFi in some p
 For example only. This is not an exhaustive list.<br>
 H = Home; B = Business
 
-|Name|AS|Type|
-|----|--|----|
-|HKT (netvigator.com)|AS4760|H|
-|HKT Enterprise (imsbiz.com)|AS4515|B|
-|HK Cable TV (hkcable.com.hk)|AS9908|H|
-|SmarTone|AS17924|H|
-|CMHK|AS9231<br>AS137872|H|
-|HKBN (ctinets.com)|AS10103|H|
-|HKBN Enterprise <sup>1</sup>|AS9381|B|
-|HGC|AS9304|H/B|
-|JUCC (University Only) <sup>2</sup><br>|AS3662|B|
+|Name|Hostname Suffix|AS Number|Type|
+|----|--|--|----|
+|HKT|netvigator.com|AS4760|H|
+|HKT Enterprise|imsbiz.com|AS4515|B|
+|HK Cable TV|hkcable.com.hk|AS9908|H|
+|SmarTone||AS17924|H|
+|CMHK|hk.chinamobile.com|AS9231<br>AS137872|H|
+|HKBN|ctinets.com|AS10103|H|
+|HKBN Enterprise <sup>1</sup>||AS9381|B|
+|HGC||AS9304|H/B|
+|Hutchison (3/Three)||AS10118|H|
+|JUCC (University Only) <sup>2</sup><br>||AS3662|B|
 
 Notes:
 1. Incorrectly labelled as **"Hosting"** (and even **VPN**) Type on IPinfo even if only used in normal WiFi, but I **failed the appeal (rejected)** (I contacted it before) due to its previous **mass port scanning** evidence (in its email reply).
@@ -99,7 +102,7 @@ Some Residential IP providers may have the following "personality":
 
 <img width="400" alt="Screenshot 2025-04-26 at 8 23 12 AM" src="https://github.com/user-attachments/assets/2b711d91-c64a-4ae4-bc13-a4b7f5321e31" />
 
-### Ideal Result
+### HK Local Broadband Test Result
 
 When testing Stream Restriction under HK local network (under any ISP mentioned above⬆️), all testing had the **green "Y"** displayed, including those incorrectly labelled as Hosting by IPinfo.
 
@@ -110,6 +113,7 @@ As a dedicated but technical student, my personality is very different from over
 I am currently experiencing mental stress with Autism Spectrum Disorder (ASD), Asperger Syndrome and **hardship** for listening to other's opinions and ideas.
 
 However, you are still welcome to drop your ideas📩 to Issues and my contacts.
+Do not try to oppose my unique idea and opinions when making suggestions.
 
 Please visit my personal website🌎 (https://ken.kenstudyjourney.cn) to learn more.
 
