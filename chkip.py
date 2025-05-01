@@ -20,7 +20,11 @@ crawl_ua_browser = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 ipt_err_dict = {
     "success": False,
     "ip_type": "Error",
-    "company_type": "Error",
+    "company_type": "Error"
+}
+ipp_err_dict = {
+    "success": False,
+    "region": "",
     "is_server": "", # Y/N
     "is_proxy": "", # Y/N
     "is_relay": "", # Y/N
@@ -46,6 +50,14 @@ ipt_res = {
     "ip2location": ipt_err_dict,
     "ipregistry": ipt_err_dict,
     "ipapi": ipt_err_dict,
+}
+ipp_res = {
+    "ipinfo": ipp_err_dict,
+    "ipdata": ipp_err_dict,
+    "ip2location": ipp_err_dict,
+    "ipregistry": ipp_err_dict,
+    "ipapi": ipp_err_dict,
+    "scamalytics": ipp_err_dict,
 }
 ipr_res = {
     "scamalytics": ipq_err_dict,
@@ -80,6 +92,11 @@ def ippcolour(ipprivacy):
     elif ipprivacy == "N":
         return pcolour.green
     return pcolour.blue
+def iplcolour(ipregion):
+    ipregion = ipregion.upper()
+    if ipregion == "HK":
+        return pcolour.blue
+    return pcolour.red
 def iprcolour(iprisk):
     if 0 <= iprisk < 50:
         return pcolour.green
@@ -92,7 +109,7 @@ def bool_str(boolval):
     return "N"
 def boolstr_bool(boolstr):
     boolstr = boolstr.strip().lower()
-    if boolstr == "true":
+    if boolstr == "true" or boolstr == "yes":
         return True
     return False
 def iptype_cap(typestr):
@@ -128,21 +145,23 @@ def ipt_print(disp_name, dict_k):
     strdisp += iptcolour(ipt_res_this["company_type"]) + str_space_l(ipt_res_this["company_type"], 10) + pcolour.end
     print(strdisp)
 def ipp_print(disp_name, dict_k):
-    ipt_res_this = ipt_res[dict_k]
+    ipp_res_this = ipp_res[dict_k]
     strdisp = ""
     strdisp += str_space_l(disp_name, 11)
-    strdisp += " |  "
-    strdisp += ippcolour(ipt_res_this["is_server"]) + str_space_l(ipt_res_this["is_server"], 1) + pcolour.end
+    strdisp += " | "
+    strdisp += iplcolour(ipp_res_this["region"]) + str_space_l(ipp_res_this["region"], 1) + pcolour.end
+    strdisp += "  "
+    strdisp += ippcolour(ipp_res_this["is_server"]) + str_space_l(ipp_res_this["is_server"], 1) + pcolour.end
     strdisp += "   "
-    strdisp += ippcolour(ipt_res_this["is_vpn"]) + str_space_l(ipt_res_this["is_vpn"], 1) + pcolour.end
+    strdisp += ippcolour(ipp_res_this["is_vpn"]) + str_space_l(ipp_res_this["is_vpn"], 1) + pcolour.end
     strdisp += "   "
-    strdisp += ippcolour(ipt_res_this["is_proxy"]) + str_space_l(ipt_res_this["is_proxy"], 1) + pcolour.end
+    strdisp += ippcolour(ipp_res_this["is_proxy"]) + str_space_l(ipp_res_this["is_proxy"], 1) + pcolour.end
     strdisp += "   "
-    strdisp += ippcolour(ipt_res_this["is_relay"]) + str_space_l(ipt_res_this["is_relay"], 1) + pcolour.end
+    strdisp += ippcolour(ipp_res_this["is_relay"]) + str_space_l(ipp_res_this["is_relay"], 1) + pcolour.end
     strdisp += "   "
-    strdisp += ippcolour(ipt_res_this["is_tor"]) + str_space_l(ipt_res_this["is_tor"], 1) + pcolour.end
+    strdisp += ippcolour(ipp_res_this["is_tor"]) + str_space_l(ipp_res_this["is_tor"], 1) + pcolour.end
     strdisp += "   "
-    strdisp += ippcolour(ipt_res_this["is_abuser"]) + str_space_l(ipt_res_this["is_abuser"], 1) + pcolour.end
+    strdisp += ippcolour(ipp_res_this["is_abuser"]) + str_space_l(ipp_res_this["is_abuser"], 1) + pcolour.end
     print(strdisp)
 def ipr_print(disp_name, dict_k, dispts = False):
     ipr_res_this = ipr_res[dict_k]
@@ -210,7 +229,11 @@ try:
     ipt_res["ipinfo"] = {
         "success": True,
         "ip_type": iptype_cap(res_dict["data"]["asn"]["type"]),
-        "company_type": ipinfo_comtype,
+        "company_type": ipinfo_comtype
+    }
+    ipp_res["ipinfo"] = {
+        "success": True,
+        "region": ip_region,
         "is_server": bool_str(res_dict["data"]["privacy"]["hosting"]),
         "is_proxy": bool_str(res_dict["data"]["privacy"]["proxy"]),
         "is_relay": bool_str(res_dict["data"]["privacy"]["relay"]),
@@ -254,12 +277,20 @@ try:
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_dict = json.loads(crawl_res.read())
     ip_type = ""
+    company_type = ""
     if "asn" in res_dict.keys():
         ip_type = res_dict["asn"]["type"]
+    if "company" in res_dict.keys():
+        if res_dict["company"]["type"] != None:
+            company_type = res_dict["company"]["type"]
     ipt_res["ipdata"] = {
         "success": True,
         "ip_type": iptype_cap(ip_type),
-        "company_type": iptype_cap(res_dict["company"]["type"]),
+        "company_type": iptype_cap(company_type)
+    }
+    ipp_res["ipdata"] = {
+        "success": True,
+        "region": res_dict["country_code"],
         "is_server": bool_str(res_dict["threat"]["is_datacenter"]),
         "is_proxy": bool_str(res_dict["threat"]["is_proxy"]),
         "is_relay": bool_str(res_dict["threat"]["is_icloud_relay"]),
@@ -283,6 +314,7 @@ try:
     crawl_req.add_header("User-Agent", crawl_ua_browser)
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+    ip2l_region = re.sub(r".*\"country_code\"\:\s?\"([A-Za-z]*)\".*", r"\1", res_html)
     is_server = boolstr_bool(re.sub(r".*\"is_data_center\"\:\s?(true|false).*", r"\1", res_html))
     # Proxy = Public Proxy || Web Proxy || Residential Proxy
     is_proxy = boolstr_bool(re.sub(r".*\"is_public_proxy\"\:\s?(true|false).*", r"\1", res_html)) or boolstr_bool(re.sub(r".*\"is_web_proxy\"\:\s?(true|false).*", r"\1", res_html)) or boolstr_bool(re.sub(r".*\"is_residential_proxy\"\:\s?(true|false).*", r"\1", res_html))
@@ -305,7 +337,11 @@ try:
     ipt_res["ip2location"] = {
         "success": True,
         "ip_type": iptype_cap(ip2l_iptype),
-        "company_type": "",
+        "company_type": ""
+    }
+    ipp_res["ip2location"] = {
+        "success": True,
+        "region": ip2l_region,
         "is_server": bool_str(is_server),
         "is_proxy": bool_str(is_proxy),
         "is_relay": "",
@@ -332,7 +368,11 @@ try:
     ipt_res["ipregistry"] = {
         "success": True,
         "ip_type": iptype_cap(res_dict["connection"]["type"]),
-        "company_type": iptype_cap(res_dict["company"]["type"]),
+        "company_type": iptype_cap(res_dict["company"]["type"])
+    }
+    ipp_res["ipregistry"] = {
+        "success": True,
+        "region": res_dict["location"]["country"]["code"],
         "is_server": bool_str(res_dict["security"]["is_cloud_provider"]),
         "is_proxy": bool_str(res_dict["security"]["is_proxy"]),
         "is_relay": bool_str(res_dict["security"]["is_relay"]),
@@ -355,7 +395,11 @@ try:
     ipt_res["ipapi"] = {
         "success": True,
         "ip_type": iptype_cap(res_dict["asn"]["type"]),
-        "company_type": iptype_cap(res_dict["company"]["type"]),
+        "company_type": iptype_cap(res_dict["company"]["type"])
+    }
+    ipp_res["ipapi"] = {
+        "success": True,
+        "region": res_dict["location"]["country_code"],
         "is_server": bool_str(res_dict["is_datacenter"]),
         "is_proxy": bool_str(res_dict["is_proxy"]),
         "is_relay": "",
@@ -381,7 +425,38 @@ try:
     crawl_req.add_header("Referer", "https://scamalytics.com")
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+    # region
+    sc_region = re.sub(r".*\<th\>Country\s*Code\<\/th\>\s*\<td\>([A-Za-z]*)\<\/td\>.*", r"\1", res_html).upper()
+    # risk score
     risk_score = float(re.sub(r".*Fraud\s*Score\:\s*([0-9]*).*", r"\1", res_html))
+    # usage type
+    is_vpn = boolstr_bool(re.sub(r".*\<th\>Anonymizing\s*VPN\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower())
+    is_srv = boolstr_bool(re.sub(r".*\<th\>Server\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower())
+    is_tor = boolstr_bool(re.sub(r".*\<th\>Tor\s*Exit\s*Node\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower())
+    is_public_pxy = re.sub(r".*\<th\>Public\s*Proxy\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
+    is_web_pxy = re.sub(r".*\<th\>Public\s*Proxy\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
+    is_pxy = boolstr_bool(is_public_pxy) or boolstr_bool(is_web_pxy)
+    is_abu_firehol = re.sub(r".*\<th\>Firehol\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
+    is_abu_ip2proxylite = re.sub(r".*\<th\>IP2ProxyLite\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
+    is_abu_ipsum = re.sub(r".*\<th\>IPsum\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
+    is_abu_spamhaus = re.sub(r".*\<th\>Spamhaus\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
+    is_abu_x4bnet = re.sub(r".*\<th\>X4Bnet\s*Spambot\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
+    is_abu = boolstr_bool(is_abu_firehol) or boolstr_bool(is_abu_ip2proxylite) or boolstr_bool(is_abu_ipsum) or boolstr_bool(is_abu_spamhaus) or boolstr_bool(is_abu_x4bnet)
+    ipt_res["scamalytics"] = {
+        "success": True,
+        "ip_type": iptype_cap(res_dict["asn"]["type"]),
+        "company_type": iptype_cap(res_dict["company"]["type"])
+    }
+    ipp_res["scamalytics"] = {
+        "success": True,
+        "region": sc_region,
+        "is_server": bool_str(res_dict["is_datacenter"]),
+        "is_proxy": bool_str(res_dict["is_proxy"]),
+        "is_relay": "",
+        "is_vpn": bool_str(res_dict["is_vpn"]),
+        "is_tor": bool_str(res_dict["is_tor"]),
+        "is_abuser": bool_str(res_dict["is_abuser"])
+    }
     ipr_res["scamalytics"] = {
         "success": True,
         "risk_score": risk_score
@@ -439,7 +514,7 @@ except Exception as e:
     print(e)
     print("")
 
-print(pcolour.bold + pcolour.blue + "More IP Info" + pcolour.end + pcolour.end)
+print(pcolour.bold + pcolour.blue + "More IP Info (from IPinfo)" + pcolour.end + pcolour.end)
 print(pcolour.blue + "AS Number:         " + pcolour.end + ip_as)
 print(pcolour.blue + "ISP:               " + pcolour.end + ip_isp)
 print(pcolour.blue + "IP Region:         " + pcolour.end + ip_region)
@@ -454,27 +529,27 @@ print("")
 print(pcolour.blue + pcolour.bold + "IP Usage Type" + pcolour.end + pcolour.end)
 print("Provider    | IP         | Company")
 ipt_print("IPinfo", "ipinfo")
-ipt_print("IPData", "ipdata")
 ipt_print("IPRegistry", "ipregistry")
+ipt_print("IPData", "ipdata")
 ipt_print("IPAPI", "ipapi")
 ipt_print("IP2Location", "ip2location")
 print("")
 
-print(pcolour.blue + pcolour.bold + "IP Privacy" + pcolour.end + pcolour.end)
-print("Provider    | SRV VPN PXY RLY TOR ABU")
+print(pcolour.blue + pcolour.bold + "IP Location & Privacy" + pcolour.end + pcolour.end)
+print("Provider    | LC SRV VPN PXY RLY TOR ABU")
 ipp_print("IPinfo", "ipinfo")
-ipp_print("IPData", "ipdata")
 ipp_print("IPRegistry", "ipregistry")
+ipp_print("IPData", "ipdata")
+ipp_print("Scamalytics", "scamalytics")
 ipp_print("IPAPI", "ipapi")
 ipp_print("IP2Location", "ip2location")
 print("")
 
 print(pcolour.blue + pcolour.bold + "IP Risk" + pcolour.end + pcolour.end)
 print("Provider    | Risk")
+ipr_print("IPData", "ipdata", True)
 ipr_print("Scamalytics", "scamalytics")
-# ipr_print("IPQS", "ipqs")
+ipr_print("IPAPI", "ipapi")
 ipr_print("CloudFlare", "cloudflare")
 ipr_print("DBIP", "dbip")
-ipr_print("IPData", "ipdata", True)
-ipr_print("IPAPI", "ipapi")
 print("")

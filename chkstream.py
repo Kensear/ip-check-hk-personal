@@ -36,7 +36,9 @@ def plfcolour(status):
     status = status.upper()
     if status == "Y":
         return pcolour.green
-    return pcolour.red
+    if status == "N" or status == "E":
+        return pcolour.red
+    return pcolour.blue
 def header_to_cookie(header):
     headerlines = str(header).splitlines()
     cookies = {}
@@ -117,16 +119,17 @@ origGetAddrInfo = socket.getaddrinfo
 def getAddrInfoWrapper4(host, port, family=0, socktype=0, proto=0, flags=0):
     return origGetAddrInfo(host, port, socket.AF_INET, socktype, proto, flags)
 def getAddrInfoWrapper6(host, port, family=0, socktype=0, proto=0, flags=0):
-    return origGetAddrInfo(host, port, socket.AF_INET, socktype, proto, flags)
+    return origGetAddrInfo(host, port, socket.AF_INET6, socktype, proto, flags)
 
 # force IPv4
 socket.getaddrinfo = getAddrInfoWrapper4
 
 test_results = []
 # Format
-# {"name": "Google Search No CAPTCHA", "status": "Y/N/E", "region": "HK", "note": ""}
+# {"name": "Google Search No CAPTCHA", "status": "Y/W/N/E", "region": "HK", "note": ""}
 # Status 狀態代碼:
 # Y: Yes / 可使用
+# W: Wrong Region (NOT HK) / 地區不對，並非香港地區
 # N: No (IP Banned) / 不可使用 (IP被ban咗)
 # E: Error (Network Error) / (網路異常)
 
@@ -136,6 +139,15 @@ print("By: Ken (Ken's Study Journey)")
 print("https://ken.kenstudyjourney.cn")
 print("=======================================")
 print("")
+
+print("Do you also want to test Mainland websites? (y/N):")
+print("If not, you may press ENTER directly.")
+c_test_ml = input().lower() # c_ = choice
+print("")
+while c_test_ml not in ["", "y", "n"]:
+    print("Invalid input. Please type \"Y\" or \"N\":")
+    c_test_ml = input().lower()
+    print("")
 
 # get ip
 print(pcolour.bold + pcolour.blue + "Your IP Address" + pcolour.end + pcolour.end)
@@ -156,6 +168,7 @@ print("")
 
 print(pcolour.bold + pcolour.blue + "Note These Result Letters" + pcolour.end + pcolour.end)
 print(pcolour.green + "Y = Yes" + pcolour.end)
+print(pcolour.blue + "W = Yes but Wrong Region (NOT HK)" + pcolour.blue)
 print(pcolour.red + "N = No (Banned by Website)" + pcolour.end)
 print(pcolour.red + "E = Network Error" + pcolour.end)
 print("")
@@ -230,7 +243,14 @@ try:
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
     gp_region = re.sub(r".*\"fjF0tb\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).strip()
-    if gp_region != "CN":
+    if gp_region == "CN":
+        test_results.append({
+            "name": "Google Play Store",
+            "status": "N",
+            "region": gp_region,
+            "note": ""
+        })
+    elif gp_region == "HK":
         test_results.append({
             "name": "Google Play Store",
             "status": "Y",
@@ -240,7 +260,7 @@ try:
     else:
         test_results.append({
             "name": "Google Play Store",
-            "status": "N",
+            "status": "W",
             "region": gp_region,
             "note": ""
         })
@@ -294,12 +314,20 @@ try:
     if "www.google.cn" in res_html:
         yt_region = "CN"
     if yt_status == "OK":
-        test_results.append({
-            "name": "YouTube No Login Required",
-            "status": "Y",
-            "region": yt_region,
-            "note": ""
-        })
+        if yt_region == "HK":
+            test_results.append({
+                "name": "YouTube No Login Required",
+                "status": "Y",
+                "region": yt_region,
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "YouTube No Login Required",
+                "status": "W",
+                "region": yt_region,
+                "note": ""
+            })
     else:
         test_results.append({
             "name": "YouTube No Login Required",
@@ -353,13 +381,21 @@ try:
     yt_region = re.sub(r".*\"detailpage\"\s*\,\s*\"contentRegion\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).upper().strip()
     if "www.google.cn" in res_html:
         yt_region = "CN"
-    if "Premium is not available in your country" not in res_html:
-        test_results.append({
-            "name": "YouTube Premium",
-            "status": "Y",
-            "region": yt_region,
-            "note": ""
-        })
+    if "not available in your country" not in res_html:
+        if yt_region == "HK":
+            test_results.append({
+                "name": "YouTube Premium",
+                "status": "Y",
+                "region": yt_region,
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "YouTube Premium",
+                "status": "W",
+                "region": yt_region,
+                "note": ""
+            })
     else:
         test_results.append({
             "name": "YouTube Premium",
@@ -392,6 +428,72 @@ except Exception as e:
         })
 plf_print()
 
+# YouTube Music
+try:
+    crawl_req = urllib.request.Request("https://music.youtube.com/?hl=en")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
+    crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
+    crawl_req.add_header("Sec-Ch-Ua-Mobile", "?0")
+    crawl_req.add_header("Sec-Ch-Ua-Model", "\"\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform", "\"Windows\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform-Version", "\"15.0.0\"")
+    crawl_req.add_header("Sec-Ch-Ua-Wow64", "?0")
+    crawl_req.add_header("Sec-Fetch-Dest", "document")
+    crawl_req.add_header("Sec-Fetch-Mode", "navigate")
+    crawl_req.add_header("Sec-Fetch-Site", "none")
+    crawl_req.add_header("Sec-Fetch-User", "?1")
+    crawl_req.add_header("Upgrade-Insecure-Requests", "1")
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+    if "not available in your area" not in res_html:
+        ym_region = re.sub(r".*\"detailpage\"\s*\,\s*\"contentRegion\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).upper().strip()
+        if ym_region == "HK":
+            test_results.append({
+                "name": "YouTube Music",
+                "status": "Y",
+                "region": ym_region,
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "YouTube Music",
+                "status": "W",
+                "region": ym_region,
+                "note": ""
+            })
+    else:
+        test_results.append({
+            "name": "YouTube Music",
+            "status": "N",
+            "region": "",
+            "note": "Not Available"
+        })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "YouTube Music",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "YouTube Music",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "YouTube Music",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
 # Bing
 try:
     crawl_req = urllib.request.Request("https://www.bing.com/search?q=curl")
@@ -402,20 +504,18 @@ try:
     bg_risky = bool(len(re.findall(r"sj\_cook\.set\(\"SRCHHPGUSR\"\s*\,\s*\"HV\"", res_html)))
     if "cn.bing.com" in bg_region:
         bg_region = "CN"
-    if not bg_risky:
-        test_results.append({
-            "name": "Bing Search",
-            "status": "Y",
-            "region": bg_region,
-            "note": ""
-        })
-    else:
-        test_results.append({
-            "name": "Bing Search",
-            "status": "Y",
-            "region": bg_region,
-            "note": "Risky"
-        })
+    bg_status = "Y"
+    if bg_region != "HK":
+        bg_status = "W"
+    bg_risky_str = ""
+    if bg_risky:
+        bg_risky_str = "Risky"
+    test_results.append({
+        "name": "Bing Search",
+        "status": bg_status,
+        "region": bg_region,
+        "note": bg_risky_str
+    })
 except Exception as e:
     err_dict = handle_connerr(e)
     if err_dict["status"] == 403 or err_dict["status"] == 429:
@@ -448,12 +548,20 @@ try:
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()]).upper()
     ap_region = res_html
-    test_results.append({
-        "name": "Apple",
-        "status": "Y",
-        "region": ap_region,
-        "note": ""
-    })
+    if ap_region == "HK":
+        test_results.append({
+            "name": "Apple",
+            "status": "Y",
+            "region": ap_region,
+            "note": ""
+        })
+    else:
+        test_results.append({
+            "name": "Apple",
+            "status": "W",
+            "region": ap_region,
+            "note": ""
+        })
 except Exception as e:
     err_dict = handle_connerr(e)
     if err_dict["status"] == 403 or err_dict["status"] == 429:
@@ -603,6 +711,107 @@ plf_print()
 
 print("")
 
+# Academic & Research Platforms
+print(pcolour.bold + pcolour.blue + "Academic & Research Platforms" + pcolour.end + pcolour.end)
+
+# Google Scholar
+try:
+    crawl_req = urllib.request.Request("https://scholar.google.com/?hl=en")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
+    crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
+    crawl_req.add_header("Sec-Ch-Ua-Mobile", "?0")
+    crawl_req.add_header("Sec-Ch-Ua-Model", "\"\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform", "\"Windows\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform-Version", "\"15.0.0\"")
+    crawl_req.add_header("Sec-Ch-Ua-Wow64", "?0")
+    crawl_req.add_header("Sec-Fetch-Dest", "document")
+    crawl_req.add_header("Sec-Fetch-Mode", "navigate")
+    crawl_req.add_header("Sec-Fetch-Site", "none")
+    crawl_req.add_header("Sec-Fetch-User", "?1")
+    crawl_req.add_header("Upgrade-Insecure-Requests", "1")
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "Google Scholar",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "Google Scholar",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "Google Scholar",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "Google Scholar",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+# Google Colab
+try:
+    crawl_req = urllib.request.Request("https://colab.research.google.com/?hl=en")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
+    crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
+    crawl_req.add_header("Sec-Ch-Ua-Mobile", "?0")
+    crawl_req.add_header("Sec-Ch-Ua-Model", "\"\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform", "\"Windows\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform-Version", "\"15.0.0\"")
+    crawl_req.add_header("Sec-Ch-Ua-Wow64", "?0")
+    crawl_req.add_header("Sec-Fetch-Dest", "document")
+    crawl_req.add_header("Sec-Fetch-Mode", "navigate")
+    crawl_req.add_header("Sec-Fetch-Site", "none")
+    crawl_req.add_header("Sec-Fetch-User", "?1")
+    crawl_req.add_header("Upgrade-Insecure-Requests", "1")
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "Google Colab",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "Google Colab",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "Google Colab",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "Google Colab",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+print("")
+
 # Streaming Platforms
 print(pcolour.bold + pcolour.blue + "Streaming Platforms" + pcolour.end + pcolour.end)
 
@@ -615,12 +824,20 @@ try:
     iq_region = re.sub(r".*mod\=([A-Za-z\-\_\s]+).*", r"\1", res_html).upper().strip()
     if iq_region == "NTW":
         iq_region = "TW"
-    test_results.append({
-        "name": "iqiyi Oversea",
-        "status": "Y",
-        "region": iq_region,
-        "note": ""
-    })
+    if iq_region == "HK":
+        test_results.append({
+            "name": "iqiyi Oversea",
+            "status": "Y",
+            "region": iq_region,
+            "note": ""
+        })
+    else:
+        test_results.append({
+            "name": "iqiyi Oversea",
+            "status": "W",
+            "region": iq_region,
+            "note": ""
+        })
 except Exception as e:
     err_dict = handle_connerr(e)
     if err_dict["status"] == 403 or err_dict["status"] == 429:
@@ -667,12 +884,20 @@ try:
     nf_region = re.sub(r".*\"country\"\:\s*\"([A-Za-z\-\_\s]+)\"\,\s*\"language\".*", r"\1", res_html).upper().strip()
     not_available = bool(len(re.findall(r"\<div\s*data\-uia\=\"locally-unavailable\"", res_html)))
     if not not_available:
-        test_results.append({
-            "name": "Netflix",
-            "status": "Y",
-            "region": nf_region,
-            "note": ""
-        })
+        if nf_region == "HK":
+            test_results.append({
+                "name": "Netflix",
+                "status": "Y",
+                "region": nf_region,
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "Netflix",
+                "status": "W",
+                "region": nf_region,
+                "note": ""
+            })
     else:
         test_results.append({
             "name": "Netflix",
@@ -732,12 +957,20 @@ try:
     apv_region = re.sub(r".*\"currentTerritory\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).upper().strip()
     not_available = bool(len(re.findall(r"isServiceRestricted", res_html)))
     if not not_available:
-        test_results.append({
-            "name": "Amazon Prime Video",
-            "status": "Y",
-            "region": apv_region,
-            "note": ""
-        })
+        if apv_region == "HK":
+            test_results.append({
+                "name": "Amazon Prime Video",
+                "status": "Y",
+                "region": apv_region,
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "Amazon Prime Video",
+                "status": "W",
+                "region": apv_region,
+                "note": ""
+            })
     else:
         test_results.append({
             "name": "Amazon Prime Video",
@@ -772,7 +1005,7 @@ plf_print()
 
 # Spotify (my addition)
 try:
-    crawl_req = urllib.request.Request("https://www.spotify.com")
+    crawl_req = urllib.request.Request("https://open.spotify.com")
     crawl_req.add_header("User-Agent", crawl_ua_browser)
     crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
     crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
@@ -819,7 +1052,6 @@ except Exception as e:
 plf_print()
 
 # Spotify Registration
-spr_pd = False
 try:
     crawl_post_param = "birth_day=11&birth_month=11&birth_year=2000&collect_personal_info=undefined&creation_flow=&creation_point=https%3A%2F%2Fwww.spotify.com%2Fhk-en%2F&displayname=Gay%20Lord&gender=male&iagree=1&key=a1e486e2729f46d6bb368d6b2bcda326&platform=www&referrer=&send-email=0&thirdpartyemail=0&identifier_token=AgE6YTvEzkReHNfJpO114514"
     crawl_req = urllib.request.Request("https://spclient.wg.spotify.com/signup/public/v1/account", data=crawl_post_param.encode(), method="POST")
@@ -831,16 +1063,23 @@ try:
     rg_success = bool(res_dict["status"] == 311)
     if rg_success:
         sp_region = res_dict["country"].strip().upper()
+        if sp_region == "HK":
+            test_results.append({
+                "name": "Spotify Registration",
+                "status": "Y",
+                "region": sp_region,
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "Spotify Registration",
+                "status": "W",
+                "region": sp_region,
+                "note": ""
+            })
+    else:
         test_results.append({
             "name": "Spotify Registration",
-            "status": "Y",
-            "region": sp_region,
-            "note": ""
-        })
-    else:
-        spr_pd = True
-        test_results.append({
-            "name": "Spotify Registration *",
             "status": "N",
             "region": "",
             "note": "Proxy Detected"
@@ -881,12 +1120,20 @@ try:
     rg_success = res_dict["Region"]["isAllowed"]
     if rg_success:
         dz_region = res_dict["Region"]["GeolocatedCountry"].strip().upper()
-        test_results.append({
-            "name": "Dazn",
-            "status": "Y",
-            "region": dz_region,
-            "note": ""
-        })
+        if dz_region == "HK":
+            test_results.append({
+                "name": "Dazn",
+                "status": "Y",
+                "region": dz_region,
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "Dazn",
+                "status": "W",
+                "region": dz_region,
+                "note": ""
+            })
     else:
         test_results.append({
             "name": "Dazn",
@@ -970,12 +1217,20 @@ try:
         res_html_4 = "".join([l.strip() for l in crawl_res_4.read().decode().splitlines()])
         dp_preview_success = bool(len(re.findall(r"preview|unavailable", res_html_4, re.IGNORECASE)))
         if dp_preview_success:
-            test_results.append({
-                "name": "Disney+",
-                "status": "Y",
-                "region": dp_region,
-                "note": ""
-            })
+            if dp_region == "HK":
+                test_results.append({
+                    "name": "Disney+",
+                    "status": "Y",
+                    "region": dp_region,
+                    "note": ""
+                })
+            else:
+                test_results.append({
+                    "name": "Disney+",
+                    "status": "W",
+                    "region": dp_region,
+                    "note": ""
+                })
         else:
             test_results.append({
                 "name": "Disney+",
@@ -1015,13 +1270,72 @@ except Exception as e:
         })
 plf_print()
 
-# Spotify Registration Proxy Detected
-if spr_pd:
-    print("")
-    print("* Note:")
-    print("  Spotify Registration may not give an accurate result")
-    print("  under poor Internetconnections, as it also detects proxy")
-    print("  based on latency.")
+# HBO Max
+try:
+    crawl_req = urllib.request.Request("https://www.max.com/")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+    max_has_region = bool(len(re.findall(r"\"userCountry\"\:\s*\"([A-Za-z\-\_\s]+)\"", res_html, re.IGNORECASE)))
+    if max_has_region:
+        max_region = re.sub(r".*\"userCountry\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html, re.IGNORECASE).strip().upper()
+        max_regionlist_u = re.findall(r"\"url\"\:\s*\"\/[a-z]{2}\/[a-z]{2}\"", res_html, re.IGNORECASE)
+        max_regionlist = [re.sub(r"\"url\"\:\s*\"\/([A-Za-z]{2})\/[A-Za-z]{2}\"", r"\1", i).upper() for i in max_regionlist_u]
+        max_regionlist = list(set(max_regionlist)) # remove duplicates
+        max_regionlist.sort()
+        if max_region in max_regionlist:
+            if max_region == "HK":
+                test_results.append({
+                    "name": "HBO Max",
+                    "status": "Y",
+                    "region": max_region,
+                    "note": ""
+                })
+            else:
+                test_results.append({
+                    "name": "HBO Max",
+                    "status": "W",
+                    "region": max_region,
+                    "note": ""
+                })
+        else:
+            test_results.append({
+                "name": "HBO Max",
+                "status": "N",
+                "region": max_region,
+                "note": "Not Available"
+            })
+    else:
+        test_results.append({
+            "name": "HBO Max",
+            "status": "N",
+            "region": "",
+            "note": "Not Available"
+        })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "HBO Max",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "HBO Max",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "HBO Max",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
 
 print("")
 
@@ -1403,12 +1717,20 @@ try:
     if has_region:
         viucom_region = re.sub(r".*\"country\"\:\s*\{\s*\"code\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html, re.IGNORECASE).strip().upper()
         if viucom_region != "NO-SERVICE":
-            test_results.append({
-                "name": "Viu.com",
-                "status": "Y",
-                "region": viucom_region,
-                "note": ""
-            })
+            if viucom_region == "HK":
+                test_results.append({
+                    "name": "Viu.com",
+                    "status": "Y",
+                    "region": viucom_region,
+                    "note": ""
+                })
+            else:
+                test_results.append({
+                    "name": "Viu.com",
+                    "status": "W",
+                    "region": viucom_region,
+                    "note": ""
+                })
         else:
             test_results.append({
                 "name": "Viu.com",
@@ -1549,65 +1871,6 @@ except Exception as e:
         })
 plf_print()
 
-# HBO Max
-try:
-    crawl_req = urllib.request.Request("https://www.max.com/")
-    crawl_req.add_header("User-Agent", crawl_ua_browser)
-    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
-    res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
-    max_has_region = bool(len(re.findall(r"\"userCountry\"\:\s*\"([A-Za-z\-\_\s]+)\"", res_html, re.IGNORECASE)))
-    if max_has_region:
-        max_region = re.sub(r".*\"userCountry\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html, re.IGNORECASE).strip().upper()
-        max_regionlist_u = re.findall(r"\"url\"\:\s*\"\/[a-z]{2}\/[a-z]{2}\"", res_html, re.IGNORECASE)
-        max_regionlist = [re.sub(r"\"url\"\:\s*\"\/([A-Za-z]{2})\/[A-Za-z]{2}\"", r"\1", i).upper() for i in max_regionlist_u]
-        max_regionlist = list(set(max_regionlist)) # remove duplicates
-        max_regionlist.sort()
-        if max_region in max_regionlist:
-            test_results.append({
-                "name": "HBO Max",
-                "status": "Y",
-                "region": max_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "HBO Max",
-                "status": "N",
-                "region": max_region,
-                "note": "Not Available"
-            })
-    else:
-        test_results.append({
-            "name": "HBO Max",
-            "status": "N",
-            "region": "",
-            "note": "Not Available"
-        })
-except Exception as e:
-    err_dict = handle_connerr(e)
-    if err_dict["status"] == 403 or err_dict["status"] == 429:
-        test_results.append({
-            "name": "HBO Max",
-            "status": "N",
-            "region": "",
-            "note": "IP Banned"
-        })
-    elif err_dict["status"] > 0:
-        test_results.append({
-            "name": "HBO Max",
-            "status": "N",
-            "region": "",
-            "note": "Status: " + str(crawl_res.status)
-        })
-    else:
-        test_results.append({
-            "name": "HBO Max",
-            "status": "E",
-            "region": "",
-            "note": err_dict["detail"]
-        })
-plf_print()
-
 # Bilibili HK/MO/TW
 # Sometimes, the web version (www.bilibili.tv) may return
 # a Block Page on some nodes.
@@ -1697,7 +1960,7 @@ try:
         crawl_req_3 = urllib.request.Request("https://ani.gamer.com.tw/")
         crawl_req_3.add_header("User-Agent", crawl_ua_browser)
         crawl_req_3.add_header("Cookie", cookie_dict_to_str(crawl_cookie_3))
-        crawl_req_3.add_header("Accept-Language", "*/*;q=0.8,application/signed-exchange;v=b3;q=0.7")
+        crawl_req_3.add_header("Accept", "*/*;q=0.8,application/signed-exchange;v=b3;q=0.7")
         crawl_req_3.add_header("Accept-Language", "zh-CN,zh;q=0.9")
         crawl_req_3.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
         crawl_req_3.add_header("Sec-Ch-Ua-Mobile", "?0")
@@ -1711,12 +1974,20 @@ try:
         crawl_res_3 = urllib.request.urlopen(crawl_req_3, timeout=crawl_timeout)
         res_html_3 = "".join([l.strip() for l in crawl_res_3.read().decode().splitlines()])
         ba_region = re.sub(r".*data\-geo\=\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html_3).strip().upper()
-        test_results.append({
-            "name": "Bahamut Anime",
-            "status": "Y",
-            "region": ba_region,
-            "note": ""
-        })
+        if ba_region == "HK":
+            test_results.append({
+                "name": "Bahamut Anime",
+                "status": "Y",
+                "region": ba_region,
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "Bahamut Anime",
+                "status": "W",
+                "region": ba_region,
+                "note": ""
+            })
 except Exception as e:
     err_dict = handle_connerr(e)
     if err_dict["status"] == 403 or err_dict["status"] == 429:
@@ -1777,79 +2048,6 @@ except Exception as e:
             "note": err_dict["detail"]
         })
 plf_print()
-
-# MTR
-# REMOVED - urllib can be blocked but HTTPie is not, regardless of the UA
-# try:
-#     crawl_req = urllib.request.Request("https://www.mtr.com.hk")
-#     crawl_req.add_header("User-Agent", crawl_ua_browser)
-#     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
-#     test_results.append({
-#         "name": "MTR",
-#         "status": "Y",
-#         "region": "",
-#         "note": ""
-#     })
-# except Exception as e:
-#     err_dict = handle_connerr(e)
-#     if err_dict["status"] == 403 or err_dict["status"] == 429:
-#         test_results.append({
-#             "name": "MTR",
-#             "status": "N",
-#             "region": "",
-#             "note": "IP Banned"
-#         })
-#     elif err_dict["status"] > 0:
-#         test_results.append({
-#             "name": "MTR",
-#             "status": "N",
-#             "region": "",
-#             "note": "Status: " + str(crawl_res.status)
-#         })
-#     else:
-#         test_results.append({
-#             "name": "MTR",
-#             "status": "E",
-#             "region": "",
-#             "note": err_dict["detail"]
-#         })
-# plf_print()
-
-# Octopus
-# try:
-#     crawl_req = urllib.request.Request("https://www.octopus.com.hk")
-#     crawl_req.add_header("User-Agent", crawl_ua_browser)
-#     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
-#     test_results.append({
-#         "name": "Octopus",
-#         "status": "Y",
-#         "region": "",
-#         "note": ""
-#     })
-# except Exception as e:
-#     err_dict = handle_connerr(e)
-#     if err_dict["status"] == 403 or err_dict["status"] == 429:
-#         test_results.append({
-#             "name": "Octopus",
-#             "status": "N",
-#             "region": "",
-#             "note": "IP Banned"
-#         })
-#     elif err_dict["status"] > 0:
-#         test_results.append({
-#             "name": "Octopus",
-#             "status": "N",
-#             "region": "",
-#             "note": "Status: " + str(crawl_res.status)
-#         })
-#     else:
-#         test_results.append({
-#             "name": "Octopus",
-#             "status": "E",
-#             "region": "",
-#             "note": err_dict["detail"]
-#         })
-# plf_print()
 
 # HK Observatory
 try:
@@ -2418,6 +2616,651 @@ except Exception as e:
 plf_print()
 
 print("")
+
+# Mainland Websites
+# Some proxy providers (like IP2World) ban all Mainland ICP-Registered websites.
+
+if c_test_ml == "y":
+    print(pcolour.bold + pcolour.blue + "Mainland Websites" + pcolour.end + pcolour.end)
+    print("(Accessibility Only; No Restriction Check)")
+
+    # Tencent/QQ News
+    try:
+        crawl_req = urllib.request.Request("https://www.qq.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Tencent/QQ News",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Tencent/QQ News",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Tencent/QQ News",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Tencent/QQ News",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # QQ Mail
+    try:
+        crawl_req = urllib.request.Request("https://mail.qq.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "QQ Mail",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "QQ Mail",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "QQ Mail",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "QQ Mail",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Weixin (Mainland)
+    try:
+        crawl_req = urllib.request.Request("https://weixin.qq.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Weixin (Mainland)",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Weixin (Mainland)",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Weixin (Mainland)",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Weixin (Mainland)",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Baidu Search No CAPTCHA
+    try:
+        crawl_req = urllib.request.Request("https://www.baidu.com/s?wd=curl")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_req.add_header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7")
+        crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
+        crawl_req.add_header("Accept-Encoding", "gzip, deflate, br, zstd")
+        crawl_req.add_header("Host", "www.baidu.com")
+        crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
+        crawl_req.add_header("Sec-Ch-Ua-Mobile", "?0")
+        crawl_req.add_header("Sec-Ch-Ua-Model", "\"\"")
+        crawl_req.add_header("Sec-Ch-Ua-Platform", "\"Windows\"")
+        crawl_req.add_header("Sec-Ch-Ua-Platform-Version", "\"15.0.0\"")
+        crawl_req.add_header("Sec-Ch-Ua-Wow64", "?0")
+        crawl_req.add_header("Sec-Fetch-Dest", "document")
+        crawl_req.add_header("Sec-Fetch-Mode", "navigate")
+        crawl_req.add_header("Sec-Fetch-Site", "none")
+        crawl_req.add_header("Sec-Fetch-User", "?1")
+        crawl_req.add_header("Upgrade-Insecure-Requests", "1")
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+        if "百度安全验证" not in res_html:
+            test_results.append({
+                "name": "Baidu Search No CAPTCHA",
+                "status": "Y",
+                "region": "",
+                "note": ""
+            })
+        else:
+            test_results.append({
+                "name": "Baidu Search No CAPTCHA",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Baidu Search No CAPTCHA",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Baidu Search No CAPTCHA",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Baidu Search No CAPTCHA",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # JD (Jingdong)
+    try:
+        crawl_req = urllib.request.Request("https://www.jd.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "JD (Jingdong)",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "JD (Jingdong)",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "JD (Jingdong)",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "JD (Jingdong)",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Taobao
+    try:
+        crawl_req = urllib.request.Request("https://www.taobao.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Taobao",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Taobao",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Taobao",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Taobao",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # NetEase (163) News
+    try:
+        crawl_req = urllib.request.Request("https://www.163.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "NetEase (163) News",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "NetEase (163) News",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "NetEase (163) News",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "NetEase (163) News",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # NetEase (163) Music
+    try:
+        crawl_req = urllib.request.Request("https://music.163.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "NetEase (163) Music",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "NetEase (163) Music",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "NetEase (163) Music",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "NetEase (163) Music",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Kugou Music
+    try:
+        crawl_req = urllib.request.Request("https://www.kugou.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Kugou Music",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Kugou Music",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Kugou Music",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Kugou Music",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Weibo
+    try:
+        crawl_req = urllib.request.Request("https://www.weibo.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Weibo",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Weibo",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Weibo",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Weibo",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # rednote (Xiaohongshu)
+    try:
+        crawl_req = urllib.request.Request("https://www.xiaohongshu.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "rednote (Xiaohongshu)",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "rednote (Xiaohongshu)",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "rednote (Xiaohongshu)",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "rednote (Xiaohongshu)",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # bilibili (Mainland)
+    try:
+        crawl_req = urllib.request.Request("https://www.bilibili.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "bilibili (Mainland)",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "bilibili (Mainland)",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "bilibili (Mainland)",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "bilibili (Mainland)",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Dazhong Dianping
+    try:
+        crawl_req = urllib.request.Request("https://www.dianping.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Dazhong Dianping",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Dazhong Dianping",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Dazhong Dianping",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Dazhong Dianping",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Ctrip (Xiecheng)
+    try:
+        crawl_req = urllib.request.Request("https://ctrip.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Ctrip (Xiecheng)",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Ctrip (Xiecheng)",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Ctrip (Xiecheng)",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Ctrip (Xiecheng)",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Douban
+    try:
+        crawl_req = urllib.request.Request("https://www.douban.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Douban",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Douban",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Douban",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Douban",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # Zhihu
+    try:
+        crawl_req = urllib.request.Request("https://www.zhihu.com")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "Zhihu",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "Zhihu",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "Zhihu",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "Zhihu",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    # 12306 Railway
+    try:
+        crawl_req = urllib.request.Request("https://www.12306.cn")
+        crawl_req.add_header("User-Agent", crawl_ua_browser)
+        crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+        test_results.append({
+            "name": "12306 Railway",
+            "status": "Y",
+            "region": "",
+            "note": ""
+        })
+    except Exception as e:
+        err_dict = handle_connerr(e)
+        if err_dict["status"] == 403 or err_dict["status"] == 429:
+            test_results.append({
+                "name": "12306 Railway",
+                "status": "N",
+                "region": "",
+                "note": "IP Banned"
+            })
+        elif err_dict["status"] > 0:
+            test_results.append({
+                "name": "12306 Railway",
+                "status": "N",
+                "region": "",
+                "note": "Status: " + str(crawl_res.status)
+            })
+        else:
+            test_results.append({
+                "name": "12306 Railway",
+                "status": "E",
+                "region": "",
+                "note": err_dict["detail"]
+            })
+    plf_print()
+
+    print("")
 
 # Ken's Study Journey
 print(pcolour.bold + pcolour.blue + "Ken's Study Journey" + pcolour.end + pcolour.end)
