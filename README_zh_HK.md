@@ -85,7 +85,7 @@ H = 家用寬頻 Home; B = 商業寬頻 Business
 |HKBN Enterprise <sup>1</sup>||AS9381|B|
 |HGC 和記環球電訊||AS9304|H/B|
 |Hutchison (3/Three)||AS10118|H|
-|JUCC 大學聯合電腦中心 (祗限University) <sup>2</sup><br>||AS3662|B|
+|JUCC 大學聯合電腦中心 (祗限大學) <sup>2</sup><br>||AS3662|B|
 
 Note:
 1. 被IPinfo標錯為**Hosting**（甚至有**VPN**）類別；我已聯絡IPinfo，而由於IPinfo此前已通過**mass port scanning**確認為server同VPN類別，我的appeal**未獲接納**（回覆郵件有提供掃描程式的evidence）
