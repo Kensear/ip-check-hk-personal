@@ -90,6 +90,16 @@ python ./chkstream.py
 YouTube "請登入以確認你並非機械人" 提示畫面：
 <img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" />
 
+## 常見服務測試原理
+
+為方便developer同researcher理解運作原理，已將部份服務的測試原理詳列下表。
+
+|測試項|測試連結|測試結果|
+|Google Search No CAPTCHA|搜尋任意關鍵字，例如curl：<br>[https://www.google.com/search?q=curl](https://www.google.com/search?q=curl)|✅ 正常顯示curl的搜尋結果<br>❌ 彈出CAPTCHA (I'm not a robot)|
+|YouTube No Signin Required|觀看任意影片，例如一部4K影片：<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ 正常顯示影片或廣告<br>❌ 請登入以確認你並非機械人|
+|Google Scholar|觀看任意影片，例如：<br>[https://scholar.google.com](https://scholar.google.com)|✅ 正常顯示Google學術搜尋畫面<br>❌ We're Sorry, Please Try again Later|
+|Netflix|[https://www.netflix.com/title/70143836](https://www.netflix.com/title/70143836)|✅ 正常顯示影片資訊<br>❌ 最上面有黃色“這部影片目前無法在您的國家/地區觀賞”提示|
+
 ## FAQ/常見問題
 
 ### 為什麼用Python？
