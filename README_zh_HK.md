@@ -98,7 +98,7 @@ YouTube "請登入以確認你並非機械人" 提示畫面：
 |-----|-------|-------|
 |Google Search No CAPTCHA|搜尋任意關鍵字，例如curl：<br>[https://www.google.com/search?q=curl](https://www.google.com/search?q=curl)|✅ 正常顯示curl的搜尋結果<br>❌ 彈出CAPTCHA (I'm not a robot)|
 |YouTube No Signin Required|觀看任意影片，例如一部4K影片：<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ 正常顯示影片或廣告<br>❌ 請登入以確認你並非機械人|
-|Google Scholar|觀看任意影片，例如：<br>[https://scholar.google.com](https://scholar.google.com)|✅ 正常顯示Google學術搜尋畫面<br>❌ We're Sorry, Please Try again Later|
+|Google Scholar|[https://scholar.google.com](https://scholar.google.com)|✅ 正常顯示Google學術搜尋畫面<br>❌ “We're sorry”或者403錯誤畫面|
 |Netflix|[https://www.netflix.com/title/70143836](https://www.netflix.com/title/70143836)|✅ 正常顯示影片資訊<br>❌ 最上面有黃色“這部影片目前無法在您的國家/地區觀賞”提示|
 
 ## FAQ/常見問題
