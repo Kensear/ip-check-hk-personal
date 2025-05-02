@@ -95,6 +95,7 @@ YouTube "請登入以確認你並非機械人" 提示畫面：
 為方便developer同researcher理解運作原理，已將部份服務的測試原理詳列下表。
 
 |測試項|測試連結|測試結果|
+|-----|-------|-------|
 |Google Search No CAPTCHA|搜尋任意關鍵字，例如curl：<br>[https://www.google.com/search?q=curl](https://www.google.com/search?q=curl)|✅ 正常顯示curl的搜尋結果<br>❌ 彈出CAPTCHA (I'm not a robot)|
 |YouTube No Signin Required|觀看任意影片，例如一部4K影片：<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ 正常顯示影片或廣告<br>❌ 請登入以確認你並非機械人|
 |Google Scholar|觀看任意影片，例如：<br>[https://scholar.google.com](https://scholar.google.com)|✅ 正常顯示Google學術搜尋畫面<br>❌ We're Sorry, Please Try again Later|
