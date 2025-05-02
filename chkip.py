@@ -114,6 +114,8 @@ def boolstr_bool(boolstr):
     return False
 def iptype_cap(typestr):
     typestr = typestr.strip().lower()
+    if typestr == "edu":
+        return "Education"
     if typestr == "isp/mob" or  typestr == "isp/mobile":
         return "ISP/Mobile"
     if typestr == "isp":
