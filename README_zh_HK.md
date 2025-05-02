@@ -1,13 +1,19 @@
 # IP位址可信程度及流媒體可用性測試 (HK)
 
-**IP位址可信程度&amp;流媒體服務可用性測試程式 (祗限香港地區)**
+## IP位址可信程度&amp;流媒體服務可用性測試程式 (祗限香港地區)
 
 ⚠️ 免責聲明/Disclaimer:
 - 祗限個人研究及實驗使用🔬（除身為developer外，我還有researcher的身分）
 - 本repo與其中所列明的任何寬頻提供商ISP🔌或網站🌎未有任何聯繫❌
-- 本人正開始學習廣東話及基於廣東話的繁體中文（作為beginner），如本README檔案如有任何錯誤，歡迎於Issues報告問題
+- 本人正開始學習廣東話及基於廣東話的繁體中文（作為beginner），如本README檔案有任何錯誤，歡迎於Issues報告問題
 
 本repo主要用於測試本港網絡、虛擬服務器VPS等節點是否可使用流媒體服務（內地用戶稱為“流媒體解鎖測試”），以及IP位址可信程度。
+
+身為本港大學生🏫（同semi-local），**只會**使用**香港地區**的節點，故唯有香港地區的測試程式。
+
+為什麼？因為短時間內頻繁切換region可能會引起網站服務的登入安全警報⚠️ (security alert)，甚至被封鎖戶口🚫。
+
+<img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/83909466-8ebf-4301-b0c3-2f97690a5b47" /><br>
 
 由於我對於Netflix的建議未能被原repo接納❌，我已按自己idea製作本repo，同時還添加了新功能（詳見下方⬇️）。
 
@@ -20,10 +26,6 @@
 基於以下資料修改：
 - [https://doc.theojs.cn/vps/tools/streaming-unlocked](https://doc.theojs.cn/vps/tools/streaming-unlocked)
 - [https://doc.theojs.cn/vps/tools/ipquality](https://doc.theojs.cn/vps/tools/ipquality)
-
-身為本港大學生🏫（同semi-local），**只會**使用**香港地區**的節點，故唯有香港地區的測試程式。
-
-為什麼？因為短時間內頻繁切換region可能會引起網站服務的登入安全警報⚠️ (security alert)，甚至被封鎖戶口🚫。
 
 ## 程式運行
 
@@ -41,9 +43,9 @@ python3 ./chkip.py
 python ./chkip.py
 ```
 
-留意以下結果字母含義：
+留意以下結果字母簡寫含義：
 
-|字母|含義|
+|字母簡寫|含義|
 |------|-------|
 |LC|IP位址所在地區ISO編碼|
 |VPN|是否被標為VPN Server|
@@ -176,7 +178,7 @@ Note:
 
 要將節點IP位址拉回🔙到本港，只需每日在全港範圍內連結到該節點，啟用Location後使用Google搜尋和地圖，並上報/更新自己GPS位置📍，持續1-30日⏳即可。
 
-根據我的實驗結果，其中一個被Google標為內地的節點IP位址**已成功**拉回✅到本港。
+根據我的實驗結果，其中兩個被Google標為內地的節點IP位址**已成功**拉回✅到本港。
 
 如欲了解詳情，請參考：https://www.tjsky.net/tutorial/546
 
@@ -184,10 +186,10 @@ Note:
 
 在本港不同地點多個網絡熱點（即上方⬆️所列明的寬頻提供商ISP）測試後，所有測試都已通過，包括被IPinfo標錯為Hosting的IP位址，例如：
 - IP位址可信程度測試程式內：
-  - IP Usage Type的表格基本顯示**綠色的"ISP"或者藍色的"Business"或"Education"**✅
-  - IP Privacy的表格基本顯示**綠色的"N"**✅
+  - IP Usage Type的表格基本顯示**綠色的**"**ISP**"或者**藍色的**"**Business**"或"**Education**"✅
+  - IP Privacy的表格基本顯示**綠色的**"**N**"✅
   - IP Risk的表格基本以**綠色**顯示較低的數值✅
-- 流媒體測試程式內，所有測試均顯示**綠色的"Y"**✅
+- 流媒體測試程式內，所有測試均顯示**綠色的**"**Y**"✅
 
 內地用戶會將這種結果稱為“**流媒體全解鎖**”✅，也是他們期望的結果。
 
@@ -199,6 +201,6 @@ Note:
 
 儘管如此，歡迎在Issues中提出自己的idea📩，但盡量避免oppose我的unique idea。
 
-如欲了解詳情，請瀏覽我的個人主頁🌎 (https://ken.kenstudyjourney.cn)。
+如欲了解詳情，請瀏覽我的個人主頁🌎 ([https://ken.kenstudyjourney.cn](https://ken.kenstudyjourney.cn))。
 
 感謝你的理解。
