@@ -1,6 +1,6 @@
 # IP Quality & Stream Restriction Checker (HK)
 
-**IP Quality &amp; Streaming Service Regional Restriction Checker (Hong Kong Region Only)**
+## IP Quality &amp; Streaming Service Regional Restriction Checker (Hong Kong Region Only)
 
 🌎 **README Language/语言:** English | [繁體中文](./README_zh_HK.md) | [简体中文](./README_zh_CN.md)
 
@@ -12,7 +12,7 @@
 
 This project is for testing whether streaming services can be used (also known as "流媒体解锁测试") and the quality of the IP address under HK local networks and VPS servers.
 
-As a Hong Kong university student🏫 (and semi-local), **only** the nodes in **Hong Kong region** are used and hence only the checkers of that region were developed (see FAQ below⬇️).
+As a Hong Kong university student🏫 (and semi-local), **only** the nodes in **Hong Kong region** are used and hence only the checkers of that region were developed (Why? See FAQ below⬇️).
 
 <img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/34740da8-3a7d-4ad7-80cb-b4a95f2b3b28" /><br>
 
@@ -32,38 +32,124 @@ Inspired by and modified from:
 
 Simply download and run the corresponding .py files in Python.
 
-It's **not recommended** to run the same type of script (Check IP or Stream) many times under the **same IP address** in a day, or it may result in IP Ban.
+> [!CAUTION]
+> **Do Not** run the same type of script (Check IP or Stream) too many times🔂  under the **same IP address** in a day, or it may result in IP Ban⛔️ by the services tested.
 
-Test IP Quality:
+### Test IP Quality
+
 ```
 # Choose one based on your device/emulator.
 python3 ./chkip.py
 python ./chkip.py
 ```
 
-Test Streaming/Local Websites:
+Be mindful of the following CAPITAL letters:
+
+|Letters|Meaning|
+|-------|-------|
+|LC|Region Code of the IP Address|
+|VPN|Whether Labelled as a VPN Server|
+|PXY|Whether Labelled as a Proxy Server|
+|RLY|Whether Labelled as a Relay Server|
+|TOR|Whether Labelled as a Tor Server|
+|ABU|Whether Labelled as an Abuser|
+
+**Non-HK**❌ regions ("LC" column) labelled by each IP address information provider will be **red** for quicker checking☑️.
+
+### Test Streaming/Local Services
+
 ```
 # Choose one based on your device/emulator.
 python3 ./chkstream.py
 python ./chkstream.py
 ```
 
+Press "Y" and then "Enter" to also test Mainland websites, or press "Enter" otherwise.
+
+Be mindful of the following result letters:
+
+|Letter|Colour|Result|
+|------|------|------|
+|Y|🟢Green|Yes|
+|W|🔵Blue|Yes, but Wrong Region (Not HK)|
+|N|🔴Red|No (IP Banned)|
+|E|🔴Red|Network Error, Unable to Test|
+
 ## New Features
 
-This script adds the following features (improvements):
+This script adds the following features (improvements) from the reference repo above⬆️:
 
-- Check if Sign-in Required for YouTube (i.e., "Sign in to confirm that you're not a bot")
-- Check HK University Websites
-- Check HK Bank Websites
+- Check if Sign-in🪪 Required for YouTube (i.e., "Sign in to confirm that you're not a bot🤖")
+- Check Academic & Research🔬 Websites (e.g., Google Scholar & Colab)
+- Check HK University🏫 Websites
+- Check HK Bank🤑 Websites
 - Check Mainland Websites (optional)
-
-It's initially a Python version (with **urllib** module) so that it can be used on iOS (with iSH app), Windows, macOS, etc. apart from just Linux servers.
 
 YouTube "Sign in to confirm that you're not a bot" Screen:
 
 <img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" /><br>
 
-## My Previous Research
+## Tech Principles of Testing
+
+The following table shows the technical working principles🛠️ of the testing of some services for the ease of understanding by developers and researchers.
+
+Please note that the actual test scripts use **keyword scanning**🔍.
+
+|Test Name|Test URL|Result|
+|---------|--------|------|
+|Google Search No CAPTCHA|Search anything (e.g., curl):<br>[https://www.google.com/search?q=curl](https://www.google.com/search?q=curl)|✅ Search Results<br>❌ CAPTCHA (I'm not a robot) Popup|
+|YouTube No Signin Required|Watch any video (e.g., a 4K video):<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ Video or Ad Playing<br>❌ Sign in to confirm you're not a bot|
+|Google Scholar|[https://scholar.google.com](https://scholar.google.com)|✅ Google Scholar Search Page<br>❌ “We're sorry” or 403 Error Page|
+|Netflix|[https://www.netflix.com/title/70143836](https://www.netflix.com/title/70143836)|✅ Movie Information<br>❌ Yellow Banner "isn't available to watch" at the Top|
+ 
+## FAQ (Frequently Asked Questions)
+
+### Why Use Python?
+
+It can also be used in the following OS (including mobile phones) apart from just Linux and VPS (Virtual Private Servers):
+- iOS (with iSH app)
+- Android (with Termux app)
+- Windows
+- macOS
+
+Pytohon is also one of my current skills.
+
+### Why Only HK Region Nodes and Test Script?
+
+As a HK university student🏫 (and semi-local), only HK nodes are required for local services and content.
+
+Switching to many different regions in a very short time will trigger **account login security alerts**⚠️ on some websites/services and may even lead to **account ban**🚫.
+
+Using node(s) of other regions for a long time can also lead to **account region change🔁**.
+
+### Why Red/Blue "Wrong Region" Colours?
+
+This is for quicker check☑️ whether the node is in HK region.
+
+### Why Limited the Width of Display?
+
+This is for testing and display on mobile phones📲 with much smaller screens than computers🖥️.
+
+### Why you also Use it on Mobile Phones?
+
+This is for my personal research and experiments🔬, testing various WiFi🛜 among different places in HK.
+
+### Why you Need this Test (and why Residential IP)?
+
+As a HK university student📝, services like Google Scholar/Colab and WhatsApp are the essentials.
+
+In Mainland, however, they are not directly accessible🚧 without a dedicated line impacting studies and coursework.
+
+However, some nodes are not ISP, Business or Education types (majorly Hosting🗃️) or reused🔂 by hundreds or thousands of other users, making certain services (like Netflix) inaccessible🚧 (i.e., IP Ban).
+
+Using a node with many abusers⚠️ may also lead to account ban🚫.
+
+This is why a Residential IP (or relevant VPS servers) is also an essential.
+
+> [!NOTE]
+> This project is only for testing IP address and streaming services. It **does not**❌ provide other services including VPS servers, Residential IPs and dedicated lines.
+
+## My Personal Research
 
 Apart from a programmer🧑‍💻 and software developer🛠️, I am also a **researcher**🔬 diving into the technical working principles behind.
 
@@ -108,8 +194,8 @@ HGC (and sometimes HKT) are the commonly-used ISPs for HK Residential IP server 
 
 Some Residential IP providers may have the following "personality":
 
-- Ban **Bank** Websites/Apps (including HK and other Banks)
-- Ban All **ICP-Registered** Websites/Apps (regardless of whether the servers are in Mainland or not)
+- Block All **Bank** Websites/Apps (including HK and other Banks)
+- Block All **ICP-Registered** Websites/Apps (even if they have servers outside Mainland)
 
 <img width="400" alt="Screenshot 2025-04-26 at 8 23 12 AM" src="https://github.com/user-attachments/assets/2b711d91-c64a-4ae4-bc13-a4b7f5321e31" /><br>
 

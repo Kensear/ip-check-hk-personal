@@ -10,7 +10,7 @@
 
 本repo主要用於測試本港網絡、虛擬服務器VPS等節點是否可使用流媒體服務（內地用戶稱作“流媒體解鎖測試”），以及IP位址可信程度。
 
-身為本港大學生🏫（同semi-local），**只會**使用**香港地區**的節點，故唯有香港地區的測試程式（詳見下面FAQ⬇️）。
+身為本港大學生🏫（同semi-local），**只會**使用**香港地區**的節點，故唯有香港地區的測試程式（為什麼？詳見下面FAQ⬇️）。
 
 <img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/34740da8-3a7d-4ad7-80cb-b4a95f2b3b28" /><br>
 
@@ -47,14 +47,14 @@ python ./chkip.py
 
 |字母簡寫|含義|
 |------|-------|
-|LC|IP位址所在地區ISO編碼|
+|LC|IP位址所在地區編碼|
 |VPN|是否被標為VPN Server|
 |PXY|是否被標為Proxy Server|
 |RLY|是否被標為Relay Server|
 |TOR|是否被標為Tor Server|
 |ABU|是否被標為濫用者 (abuser)|
 
-如果IP位址被一些數據庫標為**非香港地區**❌，表格內LC一列對應的地方會以**紅色**顯示，幫助更快判斷。
+如果IP位址被一些數據庫標為**非香港地區**❌，表格內LC一列對應的地方會以**紅色**顯示，幫助更快判斷☑️。
 
 ### 流媒體及本港服務可用性測試
 
@@ -66,7 +66,7 @@ python3 ./chkstream.py
 python ./chkstream.py
 ```
 
-在流媒體及本港服務可用性測試程式中，如欲測試內地服務可用性，請按Y然後Enter，否則直接Enter即可
+如欲測試內地服務可用性，請按Y然後Enter，否則直接Enter即可
 
 留意以下結果字母含義：
 
@@ -81,7 +81,7 @@ python ./chkstream.py
 
 本程式已在上列⬆️參考的repo的基礎之上做出改善與新增功能：
 
-- 測試YouTube是否強制登入🪪才可收看影片（即“請登入以確認你並非機械人🤖”提示畫面）
+- 測試YouTube是否必須登入🪪才可收看影片（即“請登入以確認你並非機械人🤖”提示畫面）
 - 測試學術和科研🔬網站可否使用 (例如Google Scholar同Colab)
 - 測試本港各大學🏫官方網站可否使用
 - 測試本港各銀行🤑網站可否使用
@@ -89,24 +89,24 @@ python ./chkstream.py
 
 YouTube "請登入以確認你並非機械人" 提示畫面：
 
-<img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" />
+<img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" /><br>
 
 ## 常見服務測試原理
 
-為方便developer同researcher了解運作原理，已將部份服務的測試原理詳列下表，但會通過keyword scan來測試。
+為方便developer同researcher了解運作原理，已將部份服務的測試原理🛠️詳列下表，但會通過keyword scan🔍來測試。
 
 |測試項|測試連結|測試結果|
 |-----|-------|-------|
-|Google Search No CAPTCHA|搜尋任意關鍵字，例如curl：<br>[https://www.google.com/search?q=curl](https://www.google.com/search?q=curl)|✅ 正常顯示curl的搜尋結果<br>❌ 彈出CAPTCHA (I'm not a robot)|
+|Google Search No CAPTCHA|搜尋任意關鍵字，例如curl：<br>[https://www.google.com/search?q=curl](https://www.google.com/search?q=curl)|✅ 正常顯示搜尋結果<br>❌ 彈出CAPTCHA (I'm not a robot)|
 |YouTube No Signin Required|觀看任意影片，例如一部4K影片：<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ 正常顯示影片或廣告<br>❌ 請登入以確認你並非機械人|
 |Google Scholar|[https://scholar.google.com](https://scholar.google.com)|✅ 正常顯示Google學術搜尋畫面<br>❌ “We're sorry”或者403錯誤畫面|
-|Netflix|[https://www.netflix.com/title/70143836](https://www.netflix.com/title/70143836)|✅ 正常顯示影片資訊<br>❌ 最上面有黃色“這部影片目前無法在您的國家/地區觀賞”提示|
+|Netflix|[https://www.netflix.com/title/70143836](https://www.netflix.com/title/70143836)|✅ 正常顯示影片資訊<br>❌ 最上面有黃色“無法在您的國家/地區觀賞”橫額|
 
 ## FAQ/常見問題
 
 ### 為什麼用Python？
 
-本repo最初為Python版本（連同**urllib**模組）。除Linux系統外，還可用於以下類別的OS（包括流動電話裝置）：
+除Linux系統同VPS虛擬伺服器外，還可用於以下類別的系统（包括流動電話裝置）：
 - iOS（連同iSH app）
 - Android（連同Termux app）
 - Windows
@@ -116,7 +116,7 @@ Python也是我現在的其中一個skill。
 
 ### 為什麼你只需要港區節點，只有港區測試程式？
 
-作為本港的大學生🏫（semi-local），只需要用到香港地區的節點，以使用/觀看本港服務及內容。
+作為本港的大學生🏫（同semi-local），只需要用到香港地區的節點，以使用/觀看本港服務及內容。
 
 因為短時間內頻繁切換region可能會引起網站服務的登入安全警報⚠️ (security alert)，甚至被封鎖戶口🚫。
 
@@ -134,15 +134,20 @@ Python也是我現在的其中一個skill。
 
 供本人研究及實驗🔬使用，這樣會方便自己快速測試全港不同地方的WiFi熱點🛜。
 
-### 為什麼要進行這種測試？
+### 為什麼要進行這種測試？為什麼用Residential IP？
 
 作為本港的大學生，溫習📝期間需要用到Google Scholar/Colab、WhatsApp等服務。
 
-但在內地不可直接使用🚧這些服務，需要使用專綫連同Residential IP（或者其VPS伺服器）節點，否則溫習將受妨礙。
+但在內地不可直接使用🚧這些服務，需要使用專綫節點，否則溫習將受妨礙。
 
 但是，部份節點並非ISP、Business或Education類別（一般為Hosting🗃️），或者很多人用同一個IP位址🔂，就會造成部份網站和Netflix等流媒體服務不可使用🚧（即IP位址被封鎖）。
 
 另外，如果一個IP位址內有太多濫用者 (abuser)⚠️，還有可能會導致被封鎖戶口🚫。
+
+這就是為什麼需要Residential IP（或者使用Residential IP的VPS伺服器）。
+
+> [!NOTE]
+> 本repo祗限測試IP位址及流媒體服務，不會❌供應任何VPS伺服器、Residental IP、專綫等其它服務
 
 ## 我的研究
 
@@ -190,7 +195,7 @@ Note:
 
 根據實驗結論，一些Residential IP提供商有以下特性（其中一個）：
 
-- 封鎖**銀行**網站同App（包括本港同其他地區銀行）
+- 封鎖所有**銀行**網站同App（包括本港同其他地區銀行）
 - 封鎖所有持**ICP備案編號**的網站同App（包括持有非內地server的服務）
 
 <img width="400" alt="Screenshot 2025-04-26 at 8 23 12 AM" src="https://github.com/user-attachments/assets/2b711d91-c64a-4ae4-bc13-a4b7f5321e31" /><br>
@@ -205,8 +210,8 @@ Note:
 
 我在全港範圍內的網絡（包括流動數據📲、大學校園"eduroam" WiFi🏫及免費WiFi熱點🛜）進行測試和實驗時，**並未出現過**該情況（概率為0%）❌。
 
-要將節點IP位址拉回🔙到本港，只需持續1-30日⏳做這些事情即可：
-1. 在全港範圍內連結🔌到該節點
+要將節點IP位址拉回🔙到本港，只需持續1-30日⏳做這些事情即可（每日只需做幾次）：
+1. 在全港範圍內（**物理位置**）連結🔌到該節點
 2. 在你的裝置及瀏覽器中啟用Location
 3. 使用Google搜尋🔍任意內容，或者打開Google Maps🧭
 4. 滾動到底部，並上報/更新自己GPS位置📍
@@ -231,7 +236,7 @@ Note:
 
 ## 我的特性
 
-身為一名專注、有技術技能的學生，我的性格**不同於超過99%的其他同學💘**。我在personal project及由本人領導的group project都想始終**按自己的idea完成**。
+身為一名專注、有技術技能的學生，我的性格**不同於超過99%的其他同學💘**。我在personal project及由本人引領的group project都想始終**按自己的idea完成**。
 
 我目前存在自閉症(ASD)、阿斯伯格綜合症😡等症狀，故**未能**接納其他人的idea同opinion。
 
