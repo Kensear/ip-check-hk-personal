@@ -2,8 +2,7 @@
 
 **IP Quality &amp; Streaming Service Regional Restriction Checker (Hong Kong Region Only)**
 
-🌎 README Language/语言:<br>
-[繁體中文](./README_zh_HK.md) [简体中文](./README_zh_CN.md)
+🌎 README Language/语言:<br> English | [繁體中文](./README_zh_HK.md) | [简体中文](./README_zh_CN.md)
 
 ⚠️ Disclaimer:
 - For personal research🔬 only (apart from just a developer, I am also a researcher!).
