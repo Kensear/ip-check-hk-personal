@@ -72,19 +72,19 @@ python ./chkstream.py
 
 |字母|顏色|結果|
 |------|------|------|
-|Y|綠色|可正常使用|
-|W|藍色|可使用，但地區不對（並非香港地區）|
-|N|紅色|不可使用 (IP已經被ban)|
-|E|紅色|網絡異常|
+|Y|🟢綠色|可使用|
+|W|🔵藍色|可使用，但地區不對（並非香港地區）|
+|N|🔴紅色|不可使用 (IP已經被ban)|
+|E|🔴紅色|網絡錯誤，未能查詢|
 
 ## 新增功能
 
-本程式已在上列參考的repo的基礎之上做出改善與新增功能：
+本程式已在上列⬆️參考的repo的基礎之上做出改善與新增功能：
 
-- 測試YouTube是否強制登入才可收看影片（即“請登入以確認你並非機械人”提示畫面）
-- 測試學術和科研網站可否使用 (例如Google Scholar同Colab)
-- 測試本港各大學官方網站可否使用
-- 測試本港各銀行網站可否使用
+- 測試YouTube是否強制登入🪪才可收看影片（即“請登入以確認你並非機械人🤖”提示畫面）
+- 測試學術和科研🔬網站可否使用 (例如Google Scholar同Colab)
+- 測試本港各大學🏫官方網站可否使用
+- 測試本港各銀行🤑網站可否使用
 - 測試內地網站/服務可否使用（可選項）
 
 YouTube "請登入以確認你並非機械人" 提示畫面：
@@ -92,7 +92,7 @@ YouTube "請登入以確認你並非機械人" 提示畫面：
 
 ## 常見服務測試原理
 
-為方便developer同researcher理解運作原理，已將部份服務的測試原理詳列下表。
+為方便developer同researcher了解運作原理，已將部份服務的測試原理詳列下表，但會通過keyword scan來測試。
 
 |測試項|測試連結|測試結果|
 |-----|-------|-------|
@@ -160,7 +160,7 @@ Python也是我現在的其中一個skill。
 本表格僅為樣例，可能還有更多表格內未列明的ISP<br>
 H = 家用寬頻 Home🏡; B = 商業寬頻 Business🏢; M = 流動數據 Mobile📲
 
-|名稱|Hostname最後部分|AS編碼|類別|
+|名稱|Hostname最尾部分<sup>1</sup>|AS編碼|類別|
 |----|--|--|----|
 |HKT 香港電訊|netvigator.com|AS4760|H|
 |HKT Enterprise|imsbiz.com|AS4515|B|
@@ -169,14 +169,15 @@ H = 家用寬頻 Home🏡; B = 商業寬頻 Business🏢; M = 流動數據 Mobil
 |SmarTone 數碼通||AS17924|H/M|
 |CMHK 中國移動香港|hk.chinamobile.com|AS9231<br>AS137872|H/M|
 |HKBN 香港寬頻|ctinets.com|AS10103|H/B|
-|HKBN Enterprise<sup>1</sup>||AS9381|B|
+|HKBN Enterprise<sup>2</sup>||AS9381|B|
 |HGC 和記環球電訊||AS9304|H/B|
 |Hutchison (3/Three)||AS10118|M|
-|JUCC 大學聯合電腦中心 (祗限大學)<sup>2</sup><br>||AS3662|B|
+|JUCC 大學聯合電腦中心 (祗限大學)<sup>3</sup><br>||AS3662|B|
 
 Note:
-1. 被IPinfo標錯為**Hosting**（甚至有**VPN**）類別；我已聯絡IPinfo，而由於IPinfo此前已通過**mass port scanning**確認為server同VPN類別，我的appeal**未獲接納**（回覆郵件有提供掃描程式的證據）
-2. 連同每個大學（downstream，下聯）的AS自治系統編碼
+1. 透過`nslookup`指令查詢🔍IP位址對應的Hostname得出
+2. 被IPinfo標錯❌為**Hosting**（甚至有**VPN**）類別；我已聯絡IPinfo📩，而由於IPinfo此前已通過**mass port scanning**🔍確認為server同VPN類別，我的appeal**未獲接納**（回覆郵件有提供掃描程式的證據）；但**並未影響✅**流媒體可使用性
+3. 連同每個大學（downstream，下聯）的AS自治系統編碼
 
 根據我自己的研究與實驗結論，部份本港大學使用了HGC或者HKBN Enterprise的寬頻，而非JUCC（即大學自己的AS編碼）。
 
@@ -193,13 +194,15 @@ Note:
 
 ### IP位址被Google標為內地問題
 
-由於部份用戶在啟用Location Service（即GPS）時使用Google，部份節點的IP位址已被Google標為內地，即使該IP位址並非位於該地區。
+由於部份用戶在啟用Location Service📍（即GPS）時使用Google，部份節點的IP位址已被Google標為內地，即使該IP位址並非❌位於該地區。
 
 在運行測試程式時，就會看到Google同YouTube的地區顯示為CN（內地）。
 
-我在本港WiFi網絡（包括流動數據、大學校園"eduroam" WiFi及免費WiFi熱點）進行測試和實驗時，並未出現過該情況（概率為0%）❌。
+<img width="601" alt="Screenshot 2025-05-03 at 12 05 43 PM" src="https://github.com/user-attachments/assets/7e12b2f8-078d-47d6-b9b3-df9d4656bf48" /><br>
 
-要將節點IP位址拉回🔙到本港，只需每日在全港範圍內連結到該節點，啟用Location後使用Google搜尋和地圖，並上報/更新自己GPS位置📍，持續1-30日⏳即可。
+我在本港WiFi網絡（包括流動數據📲、大學校園"eduroam" WiFi🏫及免費WiFi熱點🛜）進行測試和實驗時，並未出現過該情況（概率為0%）❌。
+
+要將節點IP位址拉回🔙到本港，只需每日在全港範圍內連結到該節點，啟用Location後使用Google搜尋（搜尋任意內容）和地圖，並在底部上報/更新自己GPS位置📍，持續1-30日⏳即可。
 
 根據我的實驗結果，其中兩個被Google標為內地的節點IP位址**已成功**拉回✅到本港。
 
@@ -218,7 +221,7 @@ Note:
 
 ## 我的特性
 
-身為一名專注、有技術能力的學生，我的性格不同於超過99%的其他同學。我在personal project及由本人領導的group project都想始終**按自己的idea完成**。
+身為一名專注、有技術技能的學生，我的性格**不同於超過99%的其他同學💘**。我在personal project及由本人領導的group project都想始終**按自己的idea完成**。
 
 我目前存在自閉症(ASD)、阿斯伯格綜合症😡等症狀，故**未能**接納其他人的idea同opinion。
 
