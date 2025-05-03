@@ -71,10 +71,16 @@ I did a lot of personal research and experiments🧪 about the Residential IPs a
 
 ### Common HK ISPs
 
-Whether from Residential IP providers or real local network (like WiFi in some places), I researched🔬 about some common ISPs and their AS (Autonomous System) numbers.
+I researched🔬 about some common ISPs in HK and their AS (Autonomous System) numbers with the following ways:
+- Residential IP🏡 (a.k.a., 住宅IP) providers
+- HK local network🛜 at different places (including Mobile Data, University Campus WiFi and Public WiFi in various shopping malls)
+
+While free WiFi around HK usually have time limits⏳ per day/session (like 15 to 30 mins, but with **unlimited free WiFi** under a small probability), the test only takes around **3 mins** to complete.
 
 For example only. This is not an exhaustive list.<br>
-H = Home; B = Business
+- H = Home Broadband🏡
+- B = Business Broadband🏢
+- M = Mobile Data📲
 
 |Name|Hostname Suffix<sup>1</sup>|AS Number|Type|
 |----|--|--|----|

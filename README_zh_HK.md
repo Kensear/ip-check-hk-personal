@@ -159,7 +159,9 @@ Python也是我現在的其中一個skill。
 本港的免費WiFi熱點一般會限制每日/每節使用時間⏳（例如15-30分鐘，但很小概率會有**不限時**的免費WiFi），但本測試只需**約3分鐘**即可完成。
 
 本表格僅為樣例，可能還有更多表格內未列明的ISP<br>
-H = 家用寬頻 Home🏡; B = 商業寬頻 Business🏢; M = 流動數據 Mobile📲
+- H = 家用寬頻 Home Broadband🏡
+- B = 商業寬頻 Business Broadband🏢
+- M = 流動數據 Mobile Data📲
 
 |名稱|Hostname最尾部分<sup>1</sup>|AS編碼|類別|
 |----|--|--|----|
