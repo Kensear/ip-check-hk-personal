@@ -188,9 +188,9 @@ Note:
 根據實驗結論，一些Residential IP提供商有以下特性（其中一個）：
 
 - 封鎖**銀行**網站同App（包括本港同其他地區銀行）
-- 封鎖所有持**內地ICP備案編號**的網站同App（包括持有非內地server的服務）
+- 封鎖所有持**ICP備案編號**的網站同App（包括持有非內地server的服務）
 
-<img width="400" alt="Screenshot 2025-04-26 at 8 23 12 AM" src="https://github.com/user-attachments/assets/2b711d91-c64a-4ae4-bc13-a4b7f5321e31" />
+<img width="400" alt="Screenshot 2025-04-26 at 8 23 12 AM" src="https://github.com/user-attachments/assets/2b711d91-c64a-4ae4-bc13-a4b7f5321e31" /><br>
 
 ### IP位址被Google標為內地問題
 
@@ -200,22 +200,29 @@ Note:
 
 <img width="601" alt="Screenshot 2025-05-03 at 12 05 43 PM" src="https://github.com/user-attachments/assets/7e12b2f8-078d-47d6-b9b3-df9d4656bf48" /><br>
 
-我在本港WiFi網絡（包括流動數據📲、大學校園"eduroam" WiFi🏫及免費WiFi熱點🛜）進行測試和實驗時，並未出現過該情況（概率為0%）❌。
+我在全港範圍內的網絡（包括流動數據📲、大學校園"eduroam" WiFi🏫及免費WiFi熱點🛜）進行測試和實驗時，**並未出現過**該情況（概率為0%）❌。
 
-要將節點IP位址拉回🔙到本港，只需每日在全港範圍內連結到該節點，啟用Location後使用Google搜尋（搜尋任意內容）和地圖，並在底部上報/更新自己GPS位置📍，持續1-30日⏳即可。
+要將節點IP位址拉回🔙到本港，只需持續1-30日⏳做這些事情即可：
+1. 在全港範圍內連結🔌到該節點
+2. 在你的裝置及瀏覽器中啟用Location
+3. 使用Google搜尋🔍任意內容，或者打開Google Maps🧭
+4. 滾動到底部，並上報/更新自己GPS位置📍
 
 根據我的實驗結果，其中兩個被Google標為內地的節點IP位址**已成功**拉回✅到本港。
 
-如欲了解詳情，請參考：https://www.tjsky.net/tutorial/546
+如欲了解詳情，請參考：[https://www.tjsky.net/tutorial/546](https://www.tjsky.net/tutorial/546)（只供參考，並非我的文章）
 
 ### 本港寬頻測試實驗結論
 
 在本港不同地點多個網絡熱點（即上方⬆️所列明的寬頻提供商ISP）測試後，所有測試都已通過，包括被IPinfo標錯為Hosting的IP位址，例如：
 - IP位址可信程度測試程式內：
-  - IP Usage Type的表格基本顯示**綠色的**"**ISP**"或者**藍色的**"**Business**"或"**Education**"✅
-  - IP Privacy的表格基本顯示**綠色的**"**N**"✅
-  - IP Risk的表格基本以**綠色**顯示較低的數值✅
-- 流媒體測試程式內，所有測試均顯示**綠色的**"**Y**"✅
+  - IP Usage Type的表格基本顯示🟢**綠色的**"**ISP**"或者**藍色的**"**Business**"或"**Education**"✅ *
+  - IP Privacy的表格基本顯示🟢**綠色的**"**N**"✅ *
+  - IP Risk的表格所有都以🟢**綠色**顯示特別低的數值✅
+- 流媒體可用性測試程式內：
+  - 所有測試均顯示🟢**綠色的**"**Y**"✅
+
+\* 被IPinfo標錯為Hosting的ISP除外，但**僅有**IPinfo這一行出現錯誤
 
 內地用戶會將這種結果稱作“**流媒體全解鎖**”✅，也是他們期望的結果。
 
