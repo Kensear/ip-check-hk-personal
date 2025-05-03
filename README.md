@@ -98,7 +98,7 @@ Please note that the actual test scripts use **keyword scanning**🔍.
 |Test Name|Test URL|Result|
 |---------|--------|------|
 |Google Search No CAPTCHA|Search anything (e.g., curl):<br>[https://www.google.com/search?q=curl](https://www.google.com/search?q=curl)|✅ Search Results<br>❌ CAPTCHA (I'm not a robot) Popup|
-|YouTube No Signin Required|Watch any video (e.g., a 4K video):<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ Video or Ad Playing<br>❌ Sign in to confirm you're not a bot|
+|YouTube No Signin Required|Watch any video (e.g., a 4K video):<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ Video or Ad Playing<br>❌ Sign in to confirm that you're not a bot|
 |Google Scholar|[https://scholar.google.com](https://scholar.google.com)|✅ Google Scholar Search Page<br>❌ “We're sorry” or 403 Error Page|
 |Netflix|[https://www.netflix.com/title/70143836](https://www.netflix.com/title/70143836)|✅ Movie Information<br>❌ Yellow Banner "isn't available to watch" at the Top|
  
