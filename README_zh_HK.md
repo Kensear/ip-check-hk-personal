@@ -7,13 +7,13 @@
 - 本repo與其中所列明的任何寬頻提供商ISP🔌或網站🌎未有任何聯繫❌
 - 本人正開始學習廣東話及基於廣東話的繁體中文（作為beginner），如本README檔案有任何錯誤，歡迎於Issues報告問題
 
-本repo主要用於測試本港網絡、虛擬服務器VPS等節點是否可使用流媒體服務（內地用戶稱為“流媒體解鎖測試”），以及IP位址可信程度。
+本repo主要用於測試本港網絡、虛擬服務器VPS等節點是否可使用流媒體服務（內地用戶稱作“流媒體解鎖測試”），以及IP位址可信程度。
 
-身為本港大學生🏫（同semi-local），**只會**使用**香港地區**的節點，故唯有香港地區的測試程式（詳見下方FAQ⬇️）。
+身為本港大學生🏫（同semi-local），**只會**使用**香港地區**的節點，故唯有香港地區的測試程式（詳見下面FAQ⬇️）。
 
-<img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/83909466-8ebf-4301-b0c3-2f97690a5b47" /><br>
+<img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/34740da8-3a7d-4ad7-80cb-b4a95f2b3b28" /><br>
 
-由於我對於Netflix的建議未能被原repo接納❌，我已按自己idea製作本repo，同時還添加了新功能（詳見下方⬇️）。
+由於我對於Netflix的建議未能被原repo接納❌，我已按自己idea製作本repo，同時還添加了新功能（詳見下面⬇️）。
 
 <img width="520" alt="Screenshot 2025-04-16 at 4 59 19 PM" src="https://github.com/user-attachments/assets/c26aaf26-9435-43b9-ac4d-2d7f4b49314c" /><br>
 
@@ -209,7 +209,7 @@ Note:
   - IP Risk的表格基本以**綠色**顯示較低的數值✅
 - 流媒體測試程式內，所有測試均顯示**綠色的**"**Y**"✅
 
-內地用戶會將這種結果稱為“**流媒體全解鎖**”✅，也是他們期望的結果。
+內地用戶會將這種結果稱作“**流媒體全解鎖**”✅，也是他們期望的結果。
 
 ## 我的特性
 
