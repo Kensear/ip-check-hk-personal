@@ -1,14 +1,23 @@
 # IP Quality & Stream Restriction Checker (HK)
 
-**IP Quality &amp; Streaming Website Regional Restriction Checker (Hong Kong Region Only)**
+**IP Quality &amp; Streaming Service Regional Restriction Checker (Hong Kong Region Only)**
 
-Language/语言: [繁體中文](./README_zh_HK.md) [简体中文](./README_zh_CN.md)
+🌎 README Language/语言:<br>
+[繁體中文](./README_zh_HK.md) [简体中文](./README_zh_CN.md)
 
-Disclaimer:
+⚠️ Disclaimer:
 - For personal research🔬 only (apart from just a developer, I am also a researcher!).
-- This project is affiliated with neither any local ISP nor any website stated.
+- This project is affiliated with neither❌ any local ISP🔌 nor any website🌎 stated.
+- This project is only for testing IP address and streaming services. It does not❌ provide other services including VPS servers.
+- As a beginner to Cantonese, the Chinese-Traditional (繁體中文) version of README may be incorrect.
 
-This was made originally due to an **argument** with the original author about Netflix module.
+This project is for testing whether streaming services can be used (also known as "流媒体解锁测试") and the quality of the IP address under HK local networks and VPS servers.
+
+As a Hong Kong university student🏫 (and semi-local), **only** the nodes in **Hong Kong region** are used and hence only the checkers of that region were developed (see FAQ below⬇️).
+
+<img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/34740da8-3a7d-4ad7-80cb-b4a95f2b3b28" /><br>
+
+This was made originally due to an **argument** with the original author about Netflix module, but along with some new features (see below⬇️).
 
 <img width="520" alt="Screenshot 2025-04-16 at 4 59 19 PM" src="https://github.com/user-attachments/assets/c26aaf26-9435-43b9-ac4d-2d7f4b49314c" /><br>
 
@@ -19,13 +28,6 @@ Please see bottom⬇️ to learn more.
 Inspired by and modified from:
 - [https://doc.theojs.cn/vps/tools/streaming-unlocked](https://doc.theojs.cn/vps/tools/streaming-unlocked)
 - [https://doc.theojs.cn/vps/tools/ipquality](https://doc.theojs.cn/vps/tools/ipquality)
-
-As a Hong Kong university student, I **only** use nodes in **Hong Kong region** and hence only the checkers of that region were developed.
-
-Switching among different **regions** very frequently may lead to critical login security alerts or even account ban.
-
-**Note:**
-Spotify Registration module may not give an accurate result under poor Internet conditions since it also detects proxy based on the **latency**.
 
 ## Running
 
@@ -59,7 +61,8 @@ This script adds the following features (improvements):
 It's initially a Python version (with **urllib** module) so that it can be used on iOS (with iSH app), Windows, macOS, etc. apart from just Linux servers.
 
 YouTube "Sign in to confirm that you're not a bot" Screen:
-<img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" />
+
+<img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" /><br>
 
 ## My Previous Research
 

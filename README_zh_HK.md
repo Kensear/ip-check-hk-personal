@@ -88,6 +88,7 @@ python ./chkstream.py
 - 測試內地網站/服務可否使用（可選項）
 
 YouTube "請登入以確認你並非機械人" 提示畫面：
+
 <img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" />
 
 ## 常見服務測試原理
