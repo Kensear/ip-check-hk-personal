@@ -202,7 +202,7 @@ Note:
 
 ### IP位址被Google標為內地問題
 
-由於部份用戶在啟用Location Service📍（即GPS）時使用Google，部份節點的IP位址已被Google標為內地，即使該IP位址並非❌位於該地區。
+由於部份用戶在內地啟用Location Service📍（即GPS）時使用Google，部份節點的IP位址已被Google標為內地，而該IP位址並非❌位於該地區。
 
 在運行測試程式時，就會看到Google同YouTube的地區顯示為CN（內地）。
 
@@ -212,7 +212,7 @@ Note:
 
 要將節點IP位址拉回🔙到本港，只需持續1-30日⏳做這些事情即可（每日只需做幾次）：
 1. 在全港範圍內（**物理位置**）連結🔌到該節點
-2. 在你的裝置及瀏覽器中啟用Location
+2. 在你的裝置及瀏覽器中啟用Location Service
 3. 使用Google搜尋🔍任意內容，或者打開Google Maps🧭
 4. 滾動到底部，並上報/更新自己GPS位置📍
 
@@ -224,7 +224,7 @@ Note:
 
 在本港不同地點多個網絡熱點（即上方⬆️所列明的寬頻提供商ISP）測試後，所有測試都已通過，包括被IPinfo標錯為Hosting的IP位址，例如：
 - IP位址可信程度測試程式內：
-  - IP Usage Type的表格基本顯示🟢**綠色的**"**ISP**"或者**藍色的**"**Business**"或"**Education**"✅ *
+  - IP Usage Type的表格基本顯示🟢**綠色的**"**ISP**"或者🔵**藍色的**"**Business**"或"**Education**"✅ *
   - IP Privacy的表格基本顯示🟢**綠色的**"**N**"✅ *
   - IP Risk的表格所有都以🟢**綠色**顯示特別低的數值✅
 - 流媒體可用性測試程式內：
