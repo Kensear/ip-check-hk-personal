@@ -48,6 +48,7 @@ python ./chkip.py
 |字母簡寫|含義|
 |------|-------|
 |LC|IP位址所在地區編碼|
+|SRV|是否被標為Server（即Data Center）|
 |VPN|是否被標為VPN Server|
 |PXY|是否被標為Proxy Server|
 |RLY|是否被標為Relay Server|

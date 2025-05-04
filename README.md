@@ -48,6 +48,7 @@ Be mindful of the following CAPITAL letters:
 |Letters|Meaning|
 |-------|-------|
 |LC|Region Code of the IP Address|
+|SRV|Whether Labelled as a Server / Data Centre|
 |VPN|Whether Labelled as a VPN Server|
 |PXY|Whether Labelled as a Proxy Server|
 |RLY|Whether Labelled as a Relay Server|
@@ -201,7 +202,7 @@ Some Residential IP providers may have the following "personality":
 
 ### Issue: IP Labelled as Mainland by Google
 
-Due to some users using Google with Location Services📍 (like GPS) enabled, some IP addresses were labelled as Mainland by Google even if it is not❌ the actual IP address location.
+Due to some users in Mainland using Google with Location Services📍 (like GPS) enabled, some IP addresses were labelled as Mainland by Google even if it is not❌ the actual IP address location.
 
 You will see that all Google and YouTube services will have the "CN" region displayed in the test scripts.
 
