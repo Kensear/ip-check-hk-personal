@@ -248,7 +248,7 @@ try:
             "name": "Google Play Store",
             "status": "N",
             "region": gp_region,
-            "note": ""
+            "note": "Not Available"
         })
     elif gp_region == "HK":
         test_results.append({
@@ -401,7 +401,7 @@ try:
             "name": "YouTube Premium",
             "status": "N",
             "region": yt_region,
-            "note": ""
+            "note": "Not Available"
         })
 except Exception as e:
     err_dict = handle_connerr(e)
