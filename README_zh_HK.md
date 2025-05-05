@@ -218,7 +218,7 @@ Note:
 3. 使用Google搜尋🔍任意內容，或者打開Google Maps🧭
 4. 滾動到底部，並上報/更新自己GPS位置📍
 
-根據我的實驗結果，其中兩個被Google標為內地的節點IP位址**已成功**拉回✅到本港。
+根據我的實驗結論，其中兩個被Google標為內地的節點IP位址**已成功**拉回✅到本港。
 
 如欲了解詳情，請參考：[https://www.tjsky.net/tutorial/546](https://www.tjsky.net/tutorial/546)（只供參考，並非我的文章）
 
