@@ -444,20 +444,15 @@ try:
     is_abu_spamhaus = re.sub(r".*\<th\>Spamhaus\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
     is_abu_x4bnet = re.sub(r".*\<th\>X4Bnet\s*Spambot\<\/th\>\s*\<td\>\<div\s*class\=\"risk\s*([a-z]*)[\s\"]*.*", r"\1", res_html).lower()
     is_abu = boolstr_bool(is_abu_firehol) or boolstr_bool(is_abu_ip2proxylite) or boolstr_bool(is_abu_ipsum) or boolstr_bool(is_abu_spamhaus) or boolstr_bool(is_abu_x4bnet)
-    ipt_res["scamalytics"] = {
-        "success": True,
-        "ip_type": iptype_cap(res_dict["asn"]["type"]),
-        "company_type": iptype_cap(res_dict["company"]["type"])
-    }
     ipp_res["scamalytics"] = {
         "success": True,
         "region": sc_region,
-        "is_server": bool_str(res_dict["is_datacenter"]),
-        "is_proxy": bool_str(res_dict["is_proxy"]),
+        "is_server": bool_str(is_srv),
+        "is_proxy": bool_str(is_pxy),
         "is_relay": "",
-        "is_vpn": bool_str(res_dict["is_vpn"]),
-        "is_tor": bool_str(res_dict["is_tor"]),
-        "is_abuser": bool_str(res_dict["is_abuser"])
+        "is_vpn": bool_str(is_vpn),
+        "is_tor": bool_str(is_tor),
+        "is_abuser": bool_str(is_abu)
     }
     ipr_res["scamalytics"] = {
         "success": True,
