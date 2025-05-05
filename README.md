@@ -2,13 +2,19 @@
 
 ## IP Quality &amp; Streaming Service Regional Restriction Checker (Hong Kong Region Only)
 
+IP位址可信程度&流媒體服務可用性測試程式 (祗限香港地區)
+
+IP质量与流媒体平台解锁测试脚本 (仅限香港地区)
+
 🌎 **README Language/语言:** English | [繁體中文](./README_zh_HK.md) | [简体中文](./README_zh_CN.md)
 
-⚠️ Disclaimer:
+### ⚠️ Disclaimer
 - For personal research🔬 only (apart from just a developer, I am also a researcher!).
 - This project is affiliated with neither❌ any local ISP🔌 nor any website🌎 stated.
 - This project is only for testing IP address and streaming services. It does not❌ provide other services including VPS servers.
 - As a beginner to Cantonese, the Chinese-Traditional (繁體中文) version of README may be incorrect.
+
+### Description
 
 This project is for testing whether streaming services can be used (also known as "流媒体解锁测试") and the quality of the IP address under HK local networks and VPS servers.
 
