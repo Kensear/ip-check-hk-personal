@@ -78,7 +78,12 @@ def plf_print(res_i = -1):
     strdisp += plfcolour(res_this["status"]) + res_this["status"] + pcolour.end
     if res_this["region"] != "":
         strdisp += " "
+        if res_this["region"] == "HK":
+            strdisp += pcolour.blue
+        else:
+            strdisp += pcolour.red
         strdisp += res_this["region"]
+        strdisp += pcolour.end
     else:
         strdisp += "   "
     if res_this["note"] != "":
@@ -250,17 +255,10 @@ try:
             "region": gp_region,
             "note": "Not Available"
         })
-    elif gp_region == "HK":
-        test_results.append({
-            "name": "Google Play Store",
-            "status": "Y",
-            "region": gp_region,
-            "note": ""
-        })
     else:
         test_results.append({
             "name": "Google Play Store",
-            "status": "W",
+            "status": "Y",
             "region": gp_region,
             "note": ""
         })
@@ -314,20 +312,12 @@ try:
     if "www.google.cn" in res_html:
         yt_region = "CN"
     if yt_status == "OK":
-        if yt_region == "HK":
-            test_results.append({
-                "name": "YouTube No Login Required",
-                "status": "Y",
-                "region": yt_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "YouTube No Login Required",
-                "status": "W",
-                "region": yt_region,
-                "note": ""
-            })
+        test_results.append({
+            "name": "YouTube No Login Required",
+            "status": "Y",
+            "region": yt_region,
+            "note": ""
+        })
     else:
         test_results.append({
             "name": "YouTube No Login Required",
@@ -382,20 +372,12 @@ try:
     if "www.google.cn" in res_html:
         yt_region = "CN"
     if "not available in your country" not in res_html:
-        if yt_region == "HK":
-            test_results.append({
-                "name": "YouTube Premium",
-                "status": "Y",
-                "region": yt_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "YouTube Premium",
-                "status": "W",
-                "region": yt_region,
-                "note": ""
-            })
+        test_results.append({
+            "name": "YouTube Premium",
+            "status": "Y",
+            "region": yt_region,
+            "note": ""
+        })
     else:
         test_results.append({
             "name": "YouTube Premium",
@@ -448,20 +430,12 @@ try:
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
     if "not available in your area" not in res_html:
         ym_region = re.sub(r".*\"detailpage\"\s*\,\s*\"contentRegion\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).upper().strip()
-        if ym_region == "HK":
-            test_results.append({
-                "name": "YouTube Music",
-                "status": "Y",
-                "region": ym_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "YouTube Music",
-                "status": "W",
-                "region": ym_region,
-                "note": ""
-            })
+        test_results.append({
+            "name": "YouTube Music",
+            "status": "Y",
+            "region": ym_region,
+            "note": ""
+        })
     else:
         test_results.append({
             "name": "YouTube Music",
@@ -505,8 +479,6 @@ try:
     if "cn.bing.com" in bg_region:
         bg_region = "CN"
     bg_status = "Y"
-    if bg_region != "HK":
-        bg_status = "W"
     bg_risky_str = ""
     if bg_risky:
         bg_risky_str = "Risky"
@@ -548,20 +520,12 @@ try:
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()]).upper()
     ap_region = res_html
-    if ap_region == "HK":
-        test_results.append({
-            "name": "Apple",
-            "status": "Y",
-            "region": ap_region,
-            "note": ""
-        })
-    else:
-        test_results.append({
-            "name": "Apple",
-            "status": "W",
-            "region": ap_region,
-            "note": ""
-        })
+    test_results.append({
+        "name": "Apple",
+        "status": "Y",
+        "region": ap_region,
+        "note": ""
+    })
 except Exception as e:
     err_dict = handle_connerr(e)
     if err_dict["status"] == 403 or err_dict["status"] == 429:
@@ -824,20 +788,12 @@ try:
     iq_region = re.sub(r".*mod\=([A-Za-z\-\_\s]+).*", r"\1", res_html).upper().strip()
     if iq_region == "NTW":
         iq_region = "TW"
-    if iq_region == "HK":
-        test_results.append({
-            "name": "iqiyi Oversea",
-            "status": "Y",
-            "region": iq_region,
-            "note": ""
-        })
-    else:
-        test_results.append({
-            "name": "iqiyi Oversea",
-            "status": "W",
-            "region": iq_region,
-            "note": ""
-        })
+    test_results.append({
+        "name": "iqiyi Oversea",
+        "status": "Y",
+        "region": iq_region,
+        "note": ""
+    })
 except Exception as e:
     err_dict = handle_connerr(e)
     if err_dict["status"] == 403 or err_dict["status"] == 429:
@@ -884,20 +840,12 @@ try:
     nf_region = re.sub(r".*\"country\"\:\s*\"([A-Za-z\-\_\s]+)\"\,\s*\"language\".*", r"\1", res_html).upper().strip()
     not_available = bool(len(re.findall(r"\<div\s*data\-uia\=\"locally-unavailable\"", res_html)))
     if not not_available:
-        if nf_region == "HK":
-            test_results.append({
-                "name": "Netflix",
-                "status": "Y",
-                "region": nf_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "Netflix",
-                "status": "W",
-                "region": nf_region,
-                "note": ""
-            })
+        test_results.append({
+            "name": "Netflix",
+            "status": "Y",
+            "region": nf_region,
+            "note": ""
+        })
     else:
         test_results.append({
             "name": "Netflix",
@@ -957,20 +905,12 @@ try:
     apv_region = re.sub(r".*\"currentTerritory\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).upper().strip()
     not_available = bool(len(re.findall(r"isServiceRestricted", res_html)))
     if not not_available:
-        if apv_region == "HK":
-            test_results.append({
-                "name": "Amazon Prime Video",
-                "status": "Y",
-                "region": apv_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "Amazon Prime Video",
-                "status": "W",
-                "region": apv_region,
-                "note": ""
-            })
+        test_results.append({
+            "name": "Amazon Prime Video",
+            "status": "Y",
+            "region": apv_region,
+            "note": ""
+        })
     else:
         test_results.append({
             "name": "Amazon Prime Video",
@@ -1063,20 +1003,12 @@ try:
     rg_success = bool(res_dict["status"] == 311)
     if rg_success:
         sp_region = res_dict["country"].strip().upper()
-        if sp_region == "HK":
-            test_results.append({
-                "name": "Spotify Registration",
-                "status": "Y",
-                "region": sp_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "Spotify Registration",
-                "status": "W",
-                "region": sp_region,
-                "note": ""
-            })
+        test_results.append({
+            "name": "Spotify Registration",
+            "status": "Y",
+            "region": sp_region,
+            "note": ""
+        })
     else:
         test_results.append({
             "name": "Spotify Registration",
@@ -1120,20 +1052,12 @@ try:
     rg_success = res_dict["Region"]["isAllowed"]
     if rg_success:
         dz_region = res_dict["Region"]["GeolocatedCountry"].strip().upper()
-        if dz_region == "HK":
-            test_results.append({
-                "name": "Dazn",
-                "status": "Y",
-                "region": dz_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "Dazn",
-                "status": "W",
-                "region": dz_region,
-                "note": ""
-            })
+        test_results.append({
+            "name": "Dazn",
+            "status": "Y",
+            "region": dz_region,
+            "note": ""
+        })
     else:
         test_results.append({
             "name": "Dazn",
@@ -1217,20 +1141,12 @@ try:
         res_html_4 = "".join([l.strip() for l in crawl_res_4.read().decode().splitlines()])
         dp_preview_success = bool(len(re.findall(r"preview|unavailable", res_html_4, re.IGNORECASE)))
         if dp_preview_success:
-            if dp_region == "HK":
-                test_results.append({
-                    "name": "Disney+",
-                    "status": "Y",
-                    "region": dp_region,
-                    "note": ""
-                })
-            else:
-                test_results.append({
-                    "name": "Disney+",
-                    "status": "W",
-                    "region": dp_region,
-                    "note": ""
-                })
+            test_results.append({
+                "name": "Disney+",
+                "status": "Y",
+                "region": dp_region,
+                "note": ""
+            })
         else:
             test_results.append({
                 "name": "Disney+",
@@ -1284,20 +1200,12 @@ try:
         max_regionlist = list(set(max_regionlist)) # remove duplicates
         max_regionlist.sort()
         if max_region in max_regionlist:
-            if max_region == "HK":
-                test_results.append({
-                    "name": "HBO Max",
-                    "status": "Y",
-                    "region": max_region,
-                    "note": ""
-                })
-            else:
-                test_results.append({
-                    "name": "HBO Max",
-                    "status": "W",
-                    "region": max_region,
-                    "note": ""
-                })
+            test_results.append({
+                "name": "HBO Max",
+                "status": "Y",
+                "region": max_region,
+                "note": ""
+            })
         else:
             test_results.append({
                 "name": "HBO Max",
@@ -1717,20 +1625,12 @@ try:
     if has_region:
         viucom_region = re.sub(r".*\"country\"\:\s*\{\s*\"code\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html, re.IGNORECASE).strip().upper()
         if viucom_region != "NO-SERVICE":
-            if viucom_region == "HK":
-                test_results.append({
-                    "name": "Viu.com",
-                    "status": "Y",
-                    "region": viucom_region,
-                    "note": ""
-                })
-            else:
-                test_results.append({
-                    "name": "Viu.com",
-                    "status": "W",
-                    "region": viucom_region,
-                    "note": ""
-                })
+            test_results.append({
+                "name": "Viu.com",
+                "status": "Y",
+                "region": viucom_region,
+                "note": ""
+            })
         else:
             test_results.append({
                 "name": "Viu.com",
@@ -1974,20 +1874,12 @@ try:
         crawl_res_3 = urllib.request.urlopen(crawl_req_3, timeout=crawl_timeout)
         res_html_3 = "".join([l.strip() for l in crawl_res_3.read().decode().splitlines()])
         ba_region = re.sub(r".*data\-geo\=\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html_3).strip().upper()
-        if ba_region == "HK":
-            test_results.append({
-                "name": "Bahamut Anime",
-                "status": "Y",
-                "region": ba_region,
-                "note": ""
-            })
-        else:
-            test_results.append({
-                "name": "Bahamut Anime",
-                "status": "W",
-                "region": ba_region,
-                "note": ""
-            })
+        test_results.append({
+            "name": "Bahamut Anime",
+            "status": "Y",
+            "region": ba_region,
+            "note": ""
+        })
 except Exception as e:
     err_dict = handle_connerr(e)
     if err_dict["status"] == 403 or err_dict["status"] == 429:
