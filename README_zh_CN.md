@@ -14,7 +14,7 @@
 
 作为一名香港的大学生🏫（和semi-local），**只会**用到**香港地区**的节点，因此只有香港地区的测试脚本（为什么？详见下方FAQ常见问题⬇️）。
 
-<img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/34740da8-3a7d-4ad7-80cb-b4a95f2b3b28" /><br>
+<img width="1250" alt="Screenshot 2025-05-05 at 12 32 37 PM" src="https://github.com/user-attachments/assets/951f4a86-3374-432c-8e69-42de00be0bfe" /><br>
 
 由于我之前关于Netflix的建议未被原第三方项目采纳❌，我已完全按照自己想法制作本项目，同时还添加了一些新功能（详见下方⬇️）。
 
@@ -76,7 +76,6 @@ python ./chkstream.py
 |字母|颜色|测试结果|
 |------|------|------|
 |Y|🟢绿色|解锁成功|
-|W|🔵蓝色|解锁成功，但地区错误（非港区）|
 |N|🔴红色|解锁失败 (IP已被封禁)|
 |E|🔴红色|网络异常，查询失败|
 
@@ -209,7 +208,7 @@ Python也是我现在的其中一个技能。
 
 在运行测试脚本时，就会看到Google和YouTube的地区已显示为CN（内地）。
 
-<img width="601" alt="Screenshot 2025-05-03 at 12 05 43 PM" src="https://github.com/user-attachments/assets/7e12b2f8-078d-47d6-b9b3-df9d4656bf48" /><br>
+<img width="750" alt="Screenshot 2025-05-05 at 1 36 43 PM" src="https://github.com/user-attachments/assets/e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" /><br>
 
 我在全香港范围内的网络（包括移动数据📲、大学校园"eduroam" WiFi🏫和免费WiFi热点🛜）进行测试和实验时，**并没有出现过**该情况（概率为0%）❌。
 

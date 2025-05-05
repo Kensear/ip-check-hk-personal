@@ -14,7 +14,7 @@
 
 身為本港大學生🏫（同semi-local），**只會**使用**香港地區**的節點，故唯有香港地區的測試程式（為什麼？詳見下面FAQ⬇️）。
 
-<img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/34740da8-3a7d-4ad7-80cb-b4a95f2b3b28" /><br>
+<img width="1250" alt="Screenshot 2025-05-05 at 12 32 37 PM" src="https://github.com/user-attachments/assets/951f4a86-3374-432c-8e69-42de00be0bfe" /><br>
 
 由於我對於Netflix的建議未能被原repo接納❌，我已按自己idea製作本repo，同時還添加了新功能（詳見下面⬇️）。
 
@@ -76,7 +76,6 @@ python ./chkstream.py
 |字母|顏色|結果|
 |------|------|------|
 |Y|🟢綠色|可使用|
-|W|🔵藍色|可使用，但地區不對（並非香港地區）|
 |N|🔴紅色|不可使用 (IP已經被ban)|
 |E|🔴紅色|網絡錯誤，未能查詢|
 
@@ -209,7 +208,7 @@ Note:
 
 在運行測試程式時，就會看到Google同YouTube的地區顯示為CN（內地）。
 
-<img width="601" alt="Screenshot 2025-05-03 at 12 05 43 PM" src="https://github.com/user-attachments/assets/7e12b2f8-078d-47d6-b9b3-df9d4656bf48" /><br>
+<img width="750" alt="Screenshot 2025-05-05 at 1 36 43 PM" src="https://github.com/user-attachments/assets/e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" /><br>
 
 我在全港範圍內的網絡（包括流動數據📲、大學校園"eduroam" WiFi🏫及免費WiFi熱點🛜）進行測試和實驗時，**並未出現過**該情況（概率為0%）❌。
 
