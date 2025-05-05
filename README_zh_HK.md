@@ -55,7 +55,7 @@ python ./chkip.py
 |TOR|是否被標為Tor Server|
 |ABU|是否被標為濫用者 (abuser)|
 
-如果IP位址被一些數據庫標為**非香港地區**❌，表格內LC一列對應的地方會以**紅色**顯示，幫助更快判斷☑️。
+如果IP位址被一些數據庫標為**非香港地區**❌，表格內LC一列對應的地方會以🔴**紅色**顯示，幫助更快判斷☑️。
 
 ### 流媒體及本港服務可用性測試
 
@@ -99,7 +99,7 @@ YouTube "請登入以確認你並非機械人" 提示畫面：
 |測試項|測試連結|測試結果|
 |-----|-------|-------|
 |Google Search No CAPTCHA|搜尋任意關鍵字，例如curl：<br>[https://www.google.com/search?q=curl](https://www.google.com/search?q=curl)|✅ 正常顯示搜尋結果<br>❌ 彈出CAPTCHA (I'm not a robot)|
-|YouTube No Signin Required|觀看任意影片，例如一部4K影片：<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ 正常顯示影片或廣告<br>❌ 請登入以確認你並非機械人|
+|YouTube No Login Required|觀看任意影片，例如一部4K影片：<br>[https://www.youtube.com/watch?v=LXb3EKWsInQ](https://www.youtube.com/watch?v=LXb3EKWsInQ)|✅ 正常顯示影片或廣告<br>❌ 請登入以確認你並非機械人|
 |Google Scholar|[https://scholar.google.com](https://scholar.google.com)|✅ 正常顯示Google學術搜尋畫面<br>❌ “We're sorry”或者403錯誤畫面|
 |Netflix|[https://www.netflix.com/title/70143836](https://www.netflix.com/title/70143836)|✅ 正常顯示影片資訊<br>❌ 最上面有黃色“無法在您的國家/地區觀賞”橫額|
 
