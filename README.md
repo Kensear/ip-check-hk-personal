@@ -16,11 +16,11 @@ IP质量与流媒体平台解锁测试脚本 (仅限香港地区)
 
 ### Description
 
-This project is for testing whether streaming services can be used (also known as "流媒体解锁测试") and the quality of the IP address under HK local networks and VPS servers.
+This project is for testing whether streaming services can be used (also known as "流媒体解锁测试" in Mainland) and the quality of the IP address under HK local networks and VPS servers.
 
 As a Hong Kong university student🏫 (and semi-local), **only** the nodes in **Hong Kong region** are used and hence only the checkers of that region were developed (Why? See FAQ below⬇️).
 
-<img width="1098" alt="Screenshot 2025-05-02 at 11 52 13 PM" src="https://github.com/user-attachments/assets/34740da8-3a7d-4ad7-80cb-b4a95f2b3b28" /><br>
+<img width="1250" alt="Screenshot 2025-05-05 at 12 32 37 PM" src="https://github.com/user-attachments/assets/951f4a86-3374-432c-8e69-42de00be0bfe" /><br>
 
 This was made originally due to an **argument** with the original author about Netflix module, but along with some new features (see below⬇️).
 
@@ -78,7 +78,6 @@ Be mindful of the following result letters:
 |Letter|Colour|Result|
 |------|------|------|
 |Y|🟢Green|Yes|
-|W|🔵Blue|Yes, but Wrong Region (Not HK)|
 |N|🔴Red|No (IP Banned)|
 |E|🔴Red|Network Error, Unable to Test|
 
@@ -212,7 +211,7 @@ Due to some users in Mainland using Google with Location Services📍 (like GPS)
 
 You will see that all Google and YouTube services will have the "CN" region displayed in the test scripts.
 
-<img width="601" alt="Screenshot 2025-05-03 at 12 05 43 PM" src="https://github.com/user-attachments/assets/7e12b2f8-078d-47d6-b9b3-df9d4656bf48" /><br>
+<img width="750" alt="Screenshot 2025-05-05 at 1 36 43 PM" src="https://github.com/user-attachments/assets/e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" /><br>
 
 From my test and experiment results, **none**❌ of the HK local networks, including Mobile Data📲, University "eduroam" WiFi🏫 and Free WiFi🛜, appeared to have this result (probability: 0%).
 
