@@ -173,7 +173,6 @@ print("")
 
 print(pcolour.bold + pcolour.blue + "Note These Result Letters" + pcolour.end + pcolour.end)
 print(pcolour.green + "Y = Yes" + pcolour.end)
-print(pcolour.blue + "W = Yes but Wrong Region (NOT HK)" + pcolour.blue)
 print(pcolour.red + "N = No (Banned by Website)" + pcolour.end)
 print(pcolour.red + "E = Network Error" + pcolour.end)
 print("")
