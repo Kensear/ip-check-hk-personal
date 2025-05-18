@@ -775,54 +775,6 @@ except Exception as e:
         })
 plf_print()
 
-# Bloomberg
-try:
-    crawl_req = urllib.request.Request("https://www.bloomberg.com")
-    crawl_req.add_header("User-Agent", crawl_ua_browser)
-    crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
-    crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
-    crawl_req.add_header("Sec-Ch-Ua-Mobile", "?0")
-    crawl_req.add_header("Sec-Ch-Ua-Model", "\"\"")
-    crawl_req.add_header("Sec-Ch-Ua-Platform", "\"Windows\"")
-    crawl_req.add_header("Sec-Ch-Ua-Platform-Version", "\"15.0.0\"")
-    crawl_req.add_header("Sec-Ch-Ua-Wow64", "?0")
-    crawl_req.add_header("Sec-Fetch-Dest", "document")
-    crawl_req.add_header("Sec-Fetch-Mode", "navigate")
-    crawl_req.add_header("Sec-Fetch-Site", "none")
-    crawl_req.add_header("Sec-Fetch-User", "?1")
-    crawl_req.add_header("Upgrade-Insecure-Requests", "1")
-    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
-    test_results.append({
-        "name": "Bloomberg",
-        "status": "Y",
-        "region": "",
-        "note": ""
-    })
-except Exception as e:
-    err_dict = handle_connerr(e)
-    if err_dict["status"] == 403 or err_dict["status"] == 429:
-        test_results.append({
-            "name": "Bloomberg",
-            "status": "N",
-            "region": "",
-            "note": "IP Banned"
-        })
-    elif err_dict["status"] > 0:
-        test_results.append({
-            "name": "Bloomberg",
-            "status": "N",
-            "region": "",
-            "note": "Status: " + str(crawl_res.status)
-        })
-    else:
-        test_results.append({
-            "name": "Bloomberg",
-            "status": "E",
-            "region": "",
-            "note": err_dict["detail"]
-        })
-plf_print()
-
 # Bloomberg Anywhere
 try:
     crawl_req = urllib.request.Request("https://bba.bloomberg.net/?utm_source=bloomberg-menu&utm_medium=terminal")
@@ -2481,6 +2433,42 @@ except Exception as e:
     else:
         test_results.append({
             "name": "HKMU",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+# Hang Seng University
+try:
+    crawl_req = urllib.request.Request("https://www.hsu.edu.hk")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "Hang Seng University",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "Hang Seng University",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "Hang Seng University",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "Hang Seng University",
             "status": "E",
             "region": "",
             "note": err_dict["detail"]
