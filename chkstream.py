@@ -1427,10 +1427,11 @@ try:
     crawl_req.add_header("Upgrade-Insecure-Requests", "1")
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+    x_region = re.sub(r".*\"country\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).upper().strip()
     test_results.append({
         "name": "X (Twitter)",
         "status": "Y",
-        "region": "",
+        "region": x_region,
         "note": ""
     })
 except Exception as e:
@@ -1478,10 +1479,11 @@ try:
     crawl_req.add_header("Upgrade-Insecure-Requests", "1")
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+    ins_region = re.sub(r".*\"country_code\"\:\s*\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).upper().strip()
     test_results.append({
         "name": "Instagram",
         "status": "Y",
-        "region": "",
+        "region": ins_region,
         "note": ""
     })
 except Exception as e:
@@ -1527,10 +1529,12 @@ try:
     crawl_req.add_header("Upgrade-Insecure-Requests", "1")
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+    res_html = "".join([l.strip() for l in crawl_res.read().decode().splitlines()])
+    rd_region = re.sub(r".*country\=\"([A-Za-z\-\_\s]+)\".*", r"\1", res_html).upper().strip()
     test_results.append({
         "name": "Reddit",
         "status": "Y",
-        "region": "",
+        "region": rd_region,
         "note": ""
     })
 except Exception as e:
