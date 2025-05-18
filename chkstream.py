@@ -214,7 +214,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Google Search No CAPTCHA",
             "status": "N",
@@ -272,7 +272,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Google Play Store",
             "status": "N",
@@ -335,7 +335,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "YouTube No Login Required",
             "status": "N",
@@ -395,7 +395,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "YouTube Premium",
             "status": "N",
@@ -453,7 +453,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "YouTube Music",
             "status": "N",
@@ -498,7 +498,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Bing Search",
             "status": "N",
@@ -536,7 +536,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Apple",
             "status": "N",
@@ -573,7 +573,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "GitHub",
             "status": "N",
@@ -610,7 +610,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Wikipedia",
             "status": "N",
@@ -658,7 +658,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Wikipedia Editing",
             "status": "N",
@@ -711,7 +711,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Google Scholar",
             "status": "N",
@@ -759,7 +759,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Google Colab",
             "status": "N",
@@ -807,7 +807,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Bloomberg Anywhere",
             "status": "N",
@@ -862,7 +862,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "ResearchGate",
             "status": "N",
@@ -907,7 +907,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "iqiyi Oversea",
             "status": "N",
@@ -973,7 +973,7 @@ except Exception as e:
             "region": "",
             "note": "Originals Only"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Netflix",
             "status": "N",
@@ -1031,7 +1031,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Amazon Prime Video",
             "status": "N",
@@ -1079,7 +1079,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Spotify",
             "status": "N",
@@ -1144,7 +1144,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Spotify Registration",
             "status": "N",
@@ -1193,7 +1193,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Dazn",
             "status": "N",
@@ -1289,7 +1289,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Disney+",
             "status": "N",
@@ -1348,7 +1348,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HBO Max",
             "status": "N",
@@ -1402,7 +1402,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Facebook",
             "status": "N",
@@ -1451,7 +1451,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "X (Twitter)",
             "status": "N",
@@ -1502,7 +1502,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Instagram",
             "status": "N",
@@ -1551,7 +1551,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Reddit",
             "status": "N",
@@ -1602,7 +1602,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "V2EX",
             "status": "N",
@@ -1651,7 +1651,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Stack Overflow",
             "status": "N",
@@ -1718,7 +1718,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Now E",
             "status": "N",
@@ -1773,7 +1773,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Viu.com",
             "status": "N",
@@ -1828,7 +1828,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Viu.TV",
             "status": "N",
@@ -1874,7 +1874,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "MyTVSuper",
             "status": "N",
@@ -1936,7 +1936,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Bilibili HK/MO/TW",
             "status": "N",
@@ -2008,7 +2008,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Bahamut Anime",
             "status": "N",
@@ -2044,7 +2044,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HK01",
             "status": "N",
@@ -2080,7 +2080,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HK Observatory",
             "status": "N",
@@ -2121,7 +2121,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HKU",
             "status": "N",
@@ -2157,7 +2157,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HKUST",
             "status": "N",
@@ -2193,7 +2193,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "CUHK",
             "status": "N",
@@ -2229,7 +2229,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HKBU",
             "status": "N",
@@ -2265,7 +2265,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "CityU",
             "status": "N",
@@ -2301,7 +2301,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "PolyU",
             "status": "N",
@@ -2339,7 +2339,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "EdUHK",
             "status": "N",
@@ -2387,7 +2387,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "LingU",
             "status": "N",
@@ -2423,7 +2423,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HKMU",
             "status": "N",
@@ -2459,7 +2459,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Hang Seng University",
             "status": "N",
@@ -2500,7 +2500,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HKU Library",
             "status": "N",
@@ -2536,7 +2536,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HKUST Library",
             "status": "N",
@@ -2572,7 +2572,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "CUHK Library",
             "status": "N",
@@ -2615,7 +2615,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "HSBC (HK)",
             "status": "N",
@@ -2651,7 +2651,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Hang Seng Bank (HK)",
             "status": "N",
@@ -2687,7 +2687,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Bank of China (HK)",
             "status": "N",
@@ -2723,7 +2723,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Standard Chartered (HK)",
             "status": "N",
@@ -2759,7 +2759,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Citibank (HK)",
             "status": "N",
@@ -2804,7 +2804,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Tencent/QQ News",
                 "status": "N",
@@ -2840,7 +2840,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "QQ Mail",
                 "status": "N",
@@ -2876,7 +2876,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Weixin (Mainland)",
                 "status": "N",
@@ -2936,7 +2936,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Baidu Search No CAPTCHA",
                 "status": "N",
@@ -2972,7 +2972,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "JD (Jingdong)",
                 "status": "N",
@@ -3008,7 +3008,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Taobao",
                 "status": "N",
@@ -3044,7 +3044,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "NetEase (163) News",
                 "status": "N",
@@ -3080,7 +3080,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "NetEase (163) Music",
                 "status": "N",
@@ -3116,7 +3116,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Kugou Music",
                 "status": "N",
@@ -3152,7 +3152,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Weibo",
                 "status": "N",
@@ -3188,7 +3188,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "rednote (Xiaohongshu)",
                 "status": "N",
@@ -3224,7 +3224,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "bilibili (Mainland)",
                 "status": "N",
@@ -3260,7 +3260,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Dazhong Dianping",
                 "status": "N",
@@ -3296,7 +3296,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Ctrip (Xiecheng)",
                 "status": "N",
@@ -3332,7 +3332,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Douban",
                 "status": "N",
@@ -3368,7 +3368,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "Zhihu",
                 "status": "N",
@@ -3404,7 +3404,7 @@ if c_test_ml == "y":
                 "region": "",
                 "note": "IP Banned"
             })
-        elif err_dict["status"] > 0:
+        elif err_dict["status"] > 0 and err_dict["status"] != 200:
             test_results.append({
                 "name": "12306 Railway",
                 "status": "N",
@@ -3447,7 +3447,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Ken's Study Journey",
             "status": "N",
@@ -3485,7 +3485,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Ken's Study Planner",
             "status": "N",
@@ -3523,7 +3523,7 @@ except Exception as e:
             "region": "",
             "note": "IP Banned"
         })
-    elif err_dict["status"] > 0:
+    elif err_dict["status"] > 0 and err_dict["status"] != 200:
         test_results.append({
             "name": "Ken Deng (Personal Site)",
             "status": "N",
