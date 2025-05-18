@@ -999,8 +999,8 @@ try:
     crawl_req.add_header("Content-Type", "application/x-www-form-urlencoded")
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_dict = json.loads(crawl_res.read())
-    rg_success = bool(res_dict["status"] == 311)
-    if rg_success:
+    rg_status = res_dict["status"]
+    if rg_status == 311:
         sp_region = res_dict["country"].strip().upper()
         test_results.append({
             "name": "Spotify Registration",
@@ -1008,12 +1008,27 @@ try:
             "region": sp_region,
             "note": ""
         })
+    elif rg_status == 120:
+        sp_region = res_dict["country"].strip().upper()
+        test_results.append({
+            "name": "Spotify Registration",
+            "status": "N",
+            "region": sp_region,
+            "note": "Not Available"
+        })
+    elif rg_status == 320:
+        test_results.append({
+            "name": "Spotify Registration",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
     else:
         test_results.append({
             "name": "Spotify Registration",
             "status": "N",
             "region": "",
-            "note": "Proxy Detected"
+            "note": "Status: " + str(rg_status)
         })
 except Exception as e:
     err_dict = handle_connerr(e)
