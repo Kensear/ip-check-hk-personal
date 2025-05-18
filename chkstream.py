@@ -2,8 +2,8 @@ import re
 import json
 import socket
 import ssl
-import urllib.request
-from random import randint
+import urllib
+import random
 
 # For Hong Kong (CN-HK) Region Only
 # as a Hong Kong University Student
@@ -145,9 +145,11 @@ print("https://ken.kenstudyjourney.cn")
 print("=======================================")
 print("")
 
-print("Do you also want to test Mainland websites? (y/N):")
+print("Do you also want to test Mainland websites?")
 print("If not, you may press ENTER directly.")
-c_test_ml = input().lower() # c_ = choice
+print("你需要測試內地網站及平台嗎？")
+print("如不需要，請直接按ENTER")
+c_test_ml = input("(y/N): ").lower() # c_ = choice
 print("")
 while c_test_ml not in ["", "y", "n"]:
     print("Invalid input. Please type \"Y\" or \"N\":")
@@ -767,6 +769,157 @@ except Exception as e:
     else:
         test_results.append({
             "name": "Google Colab",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+# Bloomberg
+try:
+    crawl_req = urllib.request.Request("https://www.bloomberg.com")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
+    crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
+    crawl_req.add_header("Sec-Ch-Ua-Mobile", "?0")
+    crawl_req.add_header("Sec-Ch-Ua-Model", "\"\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform", "\"Windows\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform-Version", "\"15.0.0\"")
+    crawl_req.add_header("Sec-Ch-Ua-Wow64", "?0")
+    crawl_req.add_header("Sec-Fetch-Dest", "document")
+    crawl_req.add_header("Sec-Fetch-Mode", "navigate")
+    crawl_req.add_header("Sec-Fetch-Site", "none")
+    crawl_req.add_header("Sec-Fetch-User", "?1")
+    crawl_req.add_header("Upgrade-Insecure-Requests", "1")
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "Bloomberg",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "Bloomberg",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "Bloomberg",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "Bloomberg",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+# Bloomberg Anywhere
+try:
+    crawl_req = urllib.request.Request("https://bba.bloomberg.net/?utm_source=bloomberg-menu&utm_medium=terminal")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
+    crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
+    crawl_req.add_header("Sec-Ch-Ua-Mobile", "?0")
+    crawl_req.add_header("Sec-Ch-Ua-Model", "\"\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform", "\"Windows\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform-Version", "\"15.0.0\"")
+    crawl_req.add_header("Sec-Ch-Ua-Wow64", "?0")
+    crawl_req.add_header("Sec-Fetch-Dest", "document")
+    crawl_req.add_header("Sec-Fetch-Mode", "navigate")
+    crawl_req.add_header("Sec-Fetch-Site", "none")
+    crawl_req.add_header("Sec-Fetch-User", "?1")
+    crawl_req.add_header("Upgrade-Insecure-Requests", "1")
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "Bloomberg Anywhere",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "Bloomberg Anywhere",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "Bloomberg Anywhere",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "Bloomberg Anywhere",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+# ResearchGate
+rsg_urls = [
+    "https://www.researchgate.net/publication/343820813_A_Systematic_Review_of_Transition_from_IPV4_To_IPV6",
+    "https://www.researchgate.net/publication/354992184_Research_on_the_Application_of_the_IPv6_Network_Protocol",
+    "https://www.researchgate.net/publication/263856140_A_Comparative_Review_Of_Internet_Protocol_Version_4_IPv4_and_Internet_Protocol_Version_6_IPv6",
+    "https://www.researchgate.net/publication/45816107_Social_and_Ethical_Aspects_of_IPv6",
+    "https://www.researchgate.net/publication/319143290_How_HTTP2_pushes_the_web_An_empirical_study_of_HTTP2_server_push",
+]
+try:
+    crawl_req = urllib.request.Request(random.choice(rsg_urls))
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_req.add_header("Accept-Language", "en-US,en;q=0.9")
+    crawl_req.add_header("Sec-Ch-Ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"")
+    crawl_req.add_header("Sec-Ch-Ua-Mobile", "?0")
+    crawl_req.add_header("Sec-Ch-Ua-Model", "\"\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform", "\"Windows\"")
+    crawl_req.add_header("Sec-Ch-Ua-Platform-Version", "\"15.0.0\"")
+    crawl_req.add_header("Sec-Ch-Ua-Wow64", "?0")
+    crawl_req.add_header("Sec-Fetch-Dest", "document")
+    crawl_req.add_header("Sec-Fetch-Mode", "navigate")
+    crawl_req.add_header("Sec-Fetch-Site", "none")
+    crawl_req.add_header("Sec-Fetch-User", "?1")
+    crawl_req.add_header("Upgrade-Insecure-Requests", "1")
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "ResearchGate",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "ResearchGate",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "ResearchGate",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "ResearchGate",
             "status": "E",
             "region": "",
             "note": err_dict["detail"]
@@ -1792,7 +1945,7 @@ try:
     crawl_session_1 = ""
     crawl_session_chars = "0123456789abcdef"
     for _ in range(32):
-        crawl_session_1 += crawl_session_chars[randint(0, len(crawl_session_chars)-1)]
+        crawl_session_1 += crawl_session_chars[random.randint(0, len(crawl_session_chars)-1)]
     crawl_req_1 = urllib.request.Request("https://api.bilibili.com/pgc/player/web/playurl?avid=18281381&cid=29892777&qn=0&type=&otype=json&ep_id=183799&fourk=1&fnver=0&fnval=16&session=" + str(crawl_session_1) + "&module=bangumi")
     crawl_req_1.add_header("User-Agent", crawl_ua_browser)
     crawl_res_1 = urllib.request.urlopen(crawl_req_1, timeout=crawl_timeout)
