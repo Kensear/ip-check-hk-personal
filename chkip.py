@@ -256,10 +256,12 @@ try:
     crawl_req.add_header("User-Agent", crawl_ua_browser)
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_dict = json.loads(crawl_res.read())
-    ip_regregions_recarr = res_dict["records"]
-    ip_regregions_arr = list(set(map(lambda r: r["country"], ip_regregions_recarr)))
-    ip_regregions_arr.sort()
-    ip_regregions_str = ", ".join(ip_regregions_arr)
+    # ip_regregions_recarr = res_dict["records"]
+    # ip_regregions_arr = list(set(map(lambda r: r["country"], ip_regregions_recarr)))
+    # ip_regregions_arr.sort()
+    # ip_regregions_str = ", ".join(ip_regregions_arr)
+    ip_regregions_str = res_dict["records"][0]["country"]
+    ip_regregions_arr = [ip_regregions_str]
 except Exception as e:
     print(pcolour.red + "Network Error" + pcolour.end)
     print("Cannot Get IPinfo WHOIS Database")
