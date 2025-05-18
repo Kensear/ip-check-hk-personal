@@ -91,15 +91,6 @@ def plf_print(res_i = -1):
         strdisp += res_this["note"]
         strdisp += ")"
     print(strdisp)
-def handle_connerr(errtxt):
-    errtxt = str(errtxt).lower()
-    if "timed out" in errtxt:
-        return "Timeout"
-    if "reset" in errtxt:
-        return "Reset"
-    if "closed connection without response" in errtxt:
-        return "Empty Reply"
-    return ""
 def handle_connerr(e):
     errtxt = str(e).lower()
     return_dict = {
@@ -2928,28 +2919,38 @@ if c_test_ml == "y":
                 "note": "IP Banned"
             })
     except Exception as e:
-        err_dict = handle_connerr(e)
-        if err_dict["status"] == 403 or err_dict["status"] == 429:
+        # ignore brotli and gzip errors
+        errtxt = str(e).lower()
+        if "can't decode byte" in errtxt:
             test_results.append({
                 "name": "Baidu Search No CAPTCHA",
-                "status": "N",
+                "status": "Y",
                 "region": "",
-                "note": "IP Banned"
-            })
-        elif err_dict["status"] > 0 and err_dict["status"] != 200:
-            test_results.append({
-                "name": "Baidu Search No CAPTCHA",
-                "status": "N",
-                "region": "",
-                "note": "Status: " + str(crawl_res.status)
+                "note": ""
             })
         else:
-            test_results.append({
-                "name": "Baidu Search No CAPTCHA",
-                "status": "E",
-                "region": "",
-                "note": err_dict["detail"]
-            })
+            err_dict = handle_connerr(e)
+            if err_dict["status"] == 403 or err_dict["status"] == 429:
+                test_results.append({
+                    "name": "Baidu Search No CAPTCHA",
+                    "status": "N",
+                    "region": "",
+                    "note": "IP Banned"
+                })
+            elif err_dict["status"] > 0 and err_dict["status"] != 200:
+                test_results.append({
+                    "name": "Baidu Search No CAPTCHA",
+                    "status": "N",
+                    "region": "",
+                    "note": "Status: " + str(crawl_res.status)
+                })
+            else:
+                test_results.append({
+                    "name": "Baidu Search No CAPTCHA",
+                    "status": "E",
+                    "region": "",
+                    "note": err_dict["detail"]
+                })
     plf_print()
 
     # JD (Jingdong)
