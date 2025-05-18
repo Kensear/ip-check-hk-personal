@@ -2,7 +2,7 @@ import re
 import json
 import socket
 import ssl
-import urllib
+import urllib.request
 import random
 
 # For Hong Kong (CN-HK) Region Only
@@ -146,7 +146,7 @@ print("=======================================")
 print("")
 
 print("Do you also want to test Mainland websites?")
-print("If not, you may press ENTER directly.")
+print("If not, press ENTER directly.")
 print("你需要測試內地網站及平台嗎？")
 print("如不需要，請直接按ENTER")
 c_test_ml = input("(y/N): ").lower() # c_ = choice
@@ -2481,6 +2481,119 @@ except Exception as e:
     else:
         test_results.append({
             "name": "HKMU",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+print("")
+
+# HK University Libraries
+print(pcolour.bold + pcolour.blue + "HK University Libraries" + pcolour.end + pcolour.end)
+
+# HKU Library
+try:
+    crawl_req = urllib.request.Request("https://lib.hku.hk")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "HKU Library",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "HKU Library",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "HKU Library",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "HKU Library",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+# HKUST Library
+try:
+    crawl_req = urllib.request.Request("https://library.hkust.edu.hk")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "HKUST Library",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "HKUST Library",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "HKUST Library",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "HKUST Library",
+            "status": "E",
+            "region": "",
+            "note": err_dict["detail"]
+        })
+plf_print()
+
+# CUHK Library
+try:
+    crawl_req = urllib.request.Request("https://www.lib.cuhk.edu.hk/")
+    crawl_req.add_header("User-Agent", crawl_ua_browser)
+    crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
+    test_results.append({
+        "name": "CUHK Library",
+        "status": "Y",
+        "region": "",
+        "note": ""
+    })
+except Exception as e:
+    err_dict = handle_connerr(e)
+    if err_dict["status"] == 403 or err_dict["status"] == 429:
+        test_results.append({
+            "name": "CUHK Library",
+            "status": "N",
+            "region": "",
+            "note": "IP Banned"
+        })
+    elif err_dict["status"] > 0:
+        test_results.append({
+            "name": "CUHK Library",
+            "status": "N",
+            "region": "",
+            "note": "Status: " + str(crawl_res.status)
+        })
+    else:
+        test_results.append({
+            "name": "CUHK Library",
             "status": "E",
             "region": "",
             "note": err_dict["detail"]
