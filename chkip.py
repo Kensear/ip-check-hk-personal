@@ -248,7 +248,9 @@ except Exception as e:
     print("Cannot Get IPinfo Database")
     print(e)
     print("")
-    pass
+    print("Cannot Continue - Cannot Get IPinfo Database")
+    print("Please Check with `curl ipinfo.io` and Try Again")
+    exit()
 
 # ipinfo.io (whois)
 try:
@@ -267,6 +269,9 @@ except Exception as e:
     print("Cannot Get IPinfo WHOIS Database")
     print(e)
     print("")
+    print("Cannot Continue - Cannot Get IPinfo WHOIS Database")
+    print("Please Check with `curl ipinfo.io` and Try Again")
+    exit()
 
 # ip type check
 
