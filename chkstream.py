@@ -1643,7 +1643,15 @@ try:
     crawl_res = urllib.request.urlopen(crawl_req, timeout=crawl_timeout)
     res_dict = json.loads(crawl_res.read())
     mts_region = res_dict["country_code"].strip().upper()
-    if mts_region == "HK":
+    mts_supported = bool(res_dict["supported_country"])
+    if mts_region == "ZP":
+        test_results.append({
+            "name": "MyTVSuper",
+            "status": "N",
+            "region": mts_region,
+            "note": "IP Banned"
+        })
+    elif mts_supported:
         test_results.append({
             "name": "MyTVSuper",
             "status": "Y",
