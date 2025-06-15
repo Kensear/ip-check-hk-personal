@@ -537,7 +537,7 @@ print(pcolour.bold + pcolour.green + str_space_l("HKT", 8) + pcolour.end + pcolo
 print("  ", end="")
 print(pcolour.bold + pcolour.green + str_space_l("HKT-DIA", 8) + pcolour.end + pcolour.end, end="") if ip_as in ["AS4515"] else print(pcolour.red + str_space_l("HKT-DIA", 8) + pcolour.end, end="")
 print("  ", end="")
-print(pcolour.bold + pcolour.green + str_space_l("HKBN", 8) + pcolour.end + pcolour.end, end="") if ip_as in ["AS10103"] else print(pcolour.red + str_space_l("HKBN", 8) + pcolour.end, end="")
+print(pcolour.bold + pcolour.green + str_space_l("HKBN", 8) + pcolour.end + pcolour.end, end="") if ip_as in ["AS9269", "AS10103"] else print(pcolour.red + str_space_l("HKBN", 8) + pcolour.end, end="")
 print("  ", end="")
 print(pcolour.bold + pcolour.green + str_space_l("WTT", 8) + pcolour.end + pcolour.end, end="") if ip_as in ["AS9381"] else print(pcolour.red + str_space_l("WTT", 8) + pcolour.end, end="")
 print("  ", end="")
