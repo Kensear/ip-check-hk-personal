@@ -255,9 +255,6 @@ As a dedicated but technical student, my personality is **very different from ov
 
 I am currently experiencing mental stress with Autism Spectrum Disorder (ASD), Asperger Syndrome😡 and **hardship** for accepting other's opinions and ideas.
 
-However, you are still welcome to drop your ideas📩 to Issues and my contacts.
-Do not try to oppose my unique idea and opinions when making suggestions.
-
-Please visit my personal website🌎 (https://ken.kenstudyjourney.cn) to learn more.
+Please visit Kensear website🌎 (https://www.kensear.com/en/unique-personality/) to learn more.
 
 Thanks for your understanding.
