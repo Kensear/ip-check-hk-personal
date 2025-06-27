@@ -28,6 +28,15 @@
 - [https://doc.theojs.cn/vps/tools/streaming-unlocked](https://doc.theojs.cn/vps/tools/streaming-unlocked)
 - [https://doc.theojs.cn/vps/tools/ipquality](https://doc.theojs.cn/vps/tools/ipquality)
 
+## 個人版本 - 任何貢獻/討論將不被接納
+
+本repo**祗限分享自己特別想法**📤（即肯細研Kensear文章/影片會用到），任何互動（Issue、Pull Request等）將**不被理會**。
+
+我可能會在下幾週/幾個月內啟用公眾版本，以便大家貢獻（可能會有更多地區choice哦！）。
+
+但如有任何問題/建議，歡迎與我聯絡：
+https://www.kensear.com/zh-hk/contact/
+
 ## 程式運行
 
 測試時，只需要下載對應Python (.py)程式，然後運行即可。

@@ -34,6 +34,17 @@ Inspired by and modified from:
 - [https://doc.theojs.cn/vps/tools/streaming-unlocked](https://doc.theojs.cn/vps/tools/streaming-unlocked)
 - [https://doc.theojs.cn/vps/tools/ipquality](https://doc.theojs.cn/vps/tools/ipquality)
 
+## Personal Version - No Contribution or Discussion Allowed
+
+This repository is **only for my personal sharing**📤 as used on Kensear articles & videos.
+
+Any interactions, including but not limited to Issues and Pull Requests, will be **ignored** in this repository.
+
+I may consider opening a Public Version for public contribution (possibly with more regions) in the coming weeks/months.
+
+However, you are welcome to contact me if you have questions/suggestions:
+https://www.kensear.com/en/contact/
+
 ## Running
 
 Simply download and run the corresponding .py files in Python.
@@ -118,7 +129,7 @@ It can also be used in the following OS (including mobile phones) apart from jus
 - Windows
 - macOS
 
-Pytohon is also one of my current skills.
+Python is also one of my current skills.
 
 ### Why Only HK Region Nodes and Test Script?
 
