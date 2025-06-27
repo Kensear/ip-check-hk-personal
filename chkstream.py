@@ -134,8 +134,8 @@ test_results = []
 
 # Welcome Msg
 print(pcolour.bold + "Streaming Restriction Test (HK)" + pcolour.end)
-print("By: Ken (Ken's Study Journey)")
-print("https://ken.kenstudyjourney.cn")
+print("By: Ken (Kensear)")
+print("https://www.kensear.com")
 print("=======================================")
 print("")
 

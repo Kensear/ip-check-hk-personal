@@ -192,8 +192,8 @@ socket.getaddrinfo = getAddrInfoWrapper4
 
 # Welcome Msg
 print(pcolour.bold + "IP Quality Test" + pcolour.end)
-print("By: Ken (Ken's Study Journey)")
-print("https://ken.kenstudyjourney.cn")
+print("By: Ken (Kensear)")
+print("https://www.kensear.com")
 print("=======================================")
 print("")
 
