@@ -14,11 +14,11 @@
 
 身為本港大學生🏫（同semi-local），**只會**使用**香港地區**的節點，故唯有香港地區的測試程式（為什麼？詳見下面FAQ⬇️）。
 
-<img width="1250" alt="Screenshot 2025-05-05 at 12 32 37 PM" src="https://github.com/user-attachments/assets/951f4a86-3374-432c-8e69-42de00be0bfe" /><br>
+<img width="1250" height="649" alt="440261998-951f4a86-3374-432c-8e69-42de00be0bfe" src="https://github.com/user-attachments/assets/e65b1c55-55d8-43b4-84da-a331a5a83418" /><br>
 
 由於我對於Netflix的建議未能被原repo接納❌，我已按自己idea製作本repo，同時還添加了新功能（詳見下面⬇️）。
 
-<img width="520" alt="Screenshot 2025-04-16 at 4 59 19 PM" src="https://github.com/user-attachments/assets/c26aaf26-9435-43b9-ac4d-2d7f4b49314c" /><br>
+<img width="520" alt="437650943-c26aaf26-9435-43b9-ac4d-2d7f4b49314c-2" src="https://github.com/user-attachments/assets/d5906271-3cd2-4a88-8549-08715fa1ea77" /><br>
 
 **我的特性:**<br>
 如果我的建議💬或者PR未能被原repo採用，我將盡快fork📑，然後按自己的idea修改，以供**本人使用**。<br>
@@ -58,7 +58,7 @@ python ./chkip.py
 
 |字母簡寫|含義|
 |------|-------|
-|LC|IP位址所在地區編碼|
+|LC|IP位址所在地區Location編碼|
 |SRV|是否被標為Server（即Data Center）|
 |VPN|是否被標為VPN Server|
 |PXY|是否被標為Proxy Server|
@@ -85,7 +85,7 @@ python ./chkstream.py
 |字母|顏色|結果|
 |------|------|------|
 |Y|🟢綠色|可使用|
-|N|🔴紅色|不可使用 (IP已經被ban)|
+|N|🔴紅色|不可使用 (IP已經被ban或者你所在地區不提供服務)|
 |E|🔴紅色|網絡錯誤，未能查詢|
 
 ## 新增功能
@@ -100,7 +100,7 @@ python ./chkstream.py
 
 YouTube "請登入以確認你並非機械人" 提示畫面：
 
-<img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" /><br>
+<img width="650" alt="437651374-37708650-8917-4ed1-930b-6bc99c37843d-2" src="https://github.com/user-attachments/assets/cc776b24-daed-4849-941f-cad862315644" /><br>
 
 ## 常見服務測試原理
 
@@ -209,7 +209,7 @@ Note:
 - 封鎖所有**銀行**網站同App（包括本港同其他地區銀行）
 - 封鎖所有持**ICP備案編號**的網站同App（包括持有非內地server的服務）
 
-<img width="400" alt="Screenshot 2025-04-26 at 8 23 12 AM" src="https://github.com/user-attachments/assets/2b711d91-c64a-4ae4-bc13-a4b7f5321e31" /><br>
+<img width="400" alt="437651118-2b711d91-c64a-4ae4-bc13-a4b7f5321e31" src="https://github.com/user-attachments/assets/f28d71e8-cf6a-478e-9218-aa8b6a19326b" /><br>
 
 ### IP位址被Google標為內地問題
 
@@ -217,7 +217,7 @@ Note:
 
 在運行測試程式時，就會看到Google同YouTube的地區顯示為CN（內地）。
 
-<img width="750" alt="Screenshot 2025-05-05 at 1 36 43 PM" src="https://github.com/user-attachments/assets/e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" /><br>
+<img width="700" alt="440264204-e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" src="https://github.com/user-attachments/assets/d2526ec5-1c4e-4e70-b362-4083ca0cb906" /><br>
 
 我在全港範圍內的網絡（包括流動數據📲、大學校園"eduroam" WiFi🏫及免費WiFi熱點🛜）進行測試和實驗時，**並未出現過**該情況（概率為0%）❌。
 
@@ -227,7 +227,7 @@ Note:
 3. 使用Google搜尋🔍任意內容，或者打開Google Maps🧭
 4. 滾動到底部，並上報/更新自己GPS位置📍
 
-根據我的實驗結論，其中兩個被Google標為內地的節點IP位址**已成功**拉回✅到本港。
+根據我的實驗結論，其中**三個**被Google標為內地的節點IP位址**已成功**拉回✅到本港（另外成功拉回一個節點的Instagram定位）。
 
 如欲了解詳情，請參考：[https://www.tjsky.net/tutorial/546](https://www.tjsky.net/tutorial/546)（只供參考，並非我的文章）
 
@@ -241,7 +241,7 @@ Note:
 - 流媒體可用性測試程式內：
   - 所有測試均顯示🟢**綠色的**"**Y**"✅
 
-\* 被IPinfo標錯為Hosting的ISP除外，但**僅有**IPinfo這一行出現錯誤
+\* 被IPinfo標錯為Hosting的ISP除外，但**僅有**少部分IP數據庫出現錯誤
 
 內地用戶會將這種結果稱作“**流媒體全解鎖**”✅，也是他們期望的結果。
 

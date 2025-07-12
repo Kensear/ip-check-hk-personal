@@ -14,11 +14,11 @@
 
 作为一名香港的大学生🏫（和semi-local），**只会**用到**香港地区**的节点，因此只有香港地区的测试脚本（为什么？详见下方FAQ常见问题⬇️）。
 
-<img width="1250" alt="Screenshot 2025-05-05 at 12 32 37 PM" src="https://github.com/user-attachments/assets/951f4a86-3374-432c-8e69-42de00be0bfe" /><br>
+<img width="1250" height="649" alt="440261998-951f4a86-3374-432c-8e69-42de00be0bfe" src="https://github.com/user-attachments/assets/e65b1c55-55d8-43b4-84da-a331a5a83418" /><br>
 
 由于我之前关于Netflix的建议未被原第三方项目采纳❌，我已完全按照自己想法制作本项目，同时还添加了一些新功能（详见下方⬇️）。
 
-<img width="520" alt="Screenshot 2025-04-16 at 4 59 19 PM" src="https://github.com/user-attachments/assets/c26aaf26-9435-43b9-ac4d-2d7f4b49314c" /><br>
+<img width="520" alt="437650943-c26aaf26-9435-43b9-ac4d-2d7f4b49314c-2" src="https://github.com/user-attachments/assets/d5906271-3cd2-4a88-8549-08715fa1ea77" /><br>
 
 **我的性格：**<br>
 如果我的建议💬或拉取请求PR未被原项目采纳，将尽快复制一份(fork)📑，然后完全按照自己的想法修改，以便**本人使用**。<br>
@@ -85,7 +85,7 @@ python ./chkstream.py
 |字母|颜色|测试结果|
 |------|------|------|
 |Y|🟢绿色|解锁成功|
-|N|🔴红色|解锁失败 (IP已被封禁)|
+|N|🔴红色|解锁失败 (IP已被封禁或当前地区不可用)|
 |E|🔴红色|网络异常，查询失败|
 
 ## 新功能
@@ -100,7 +100,7 @@ python ./chkstream.py
 
 YouTube“请登录，以便我们确认你不是聊天机器人”提示界面：
 
-<img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" /><br>
+<img width="650" alt="437651374-37708650-8917-4ed1-930b-6bc99c37843d-2" src="https://github.com/user-attachments/assets/cc776b24-daed-4849-941f-cad862315644" /><br>
 
 ## 常见流媒体测试原理
 
@@ -209,7 +209,7 @@ Python也是我现在的其中一个技能。
 - 屏蔽所有**银行**的网站和APP（包括香港本地和全球其它银行）
 - 屏蔽所有**已备案**的网站和APP（即使在境外有服务器）
 
-<img width="400" alt="Screenshot 2025-04-26 at 8 23 12 AM" src="https://github.com/user-attachments/assets/2b711d91-c64a-4ae4-bc13-a4b7f5321e31" /><br>
+<img width="400" alt="437651118-2b711d91-c64a-4ae4-bc13-a4b7f5321e31" src="https://github.com/user-attachments/assets/f28d71e8-cf6a-478e-9218-aa8b6a19326b" /><br>
 
 ### IP地址被Google标为内地问题
 
@@ -217,7 +217,7 @@ Python也是我现在的其中一个技能。
 
 在运行测试脚本时，就会看到Google和YouTube的地区已显示为CN（内地）。
 
-<img width="750" alt="Screenshot 2025-05-05 at 1 36 43 PM" src="https://github.com/user-attachments/assets/e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" /><br>
+<img width="700" alt="440264204-e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" src="https://github.com/user-attachments/assets/d2526ec5-1c4e-4e70-b362-4083ca0cb906" /><br>
 
 我在全香港范围内的网络（包括移动数据📲、大学校园"eduroam" WiFi🏫和免费WiFi热点🛜）进行测试和实验时，**并没有出现过**该情况（概率为0%）❌。
 
@@ -227,7 +227,7 @@ Python也是我现在的其中一个技能。
 3. 在Google上搜索🔍任意内容，或打开Google地图🧭
 4. 划到底部，并上报/更新自己的GPS位置📍
 
-根据我的实验结果，其中两个被Google标为内地的节点IP地址**已成功**拉回✅到港区。
+根据我的实验结果，其中**三个**被Google标为内地的节点IP地址**已成功**拉回✅到港区（加上另外一个Ins的定位被拉回）。
 
 更多信息请参考：[https://www.tjsky.net/tutorial/546](https://www.tjsky.net/tutorial/546)（仅供参考，不是我写的文章）
 
@@ -241,7 +241,7 @@ Python也是我现在的其中一个技能。
 - 流媒体测试脚本中：
   - 所有测试均显示🟢**绿色的**"**Y**"✅
 
-\* 被IPinfo错误标为Hosting的运营商除外，但**只有**IPinfo这一行被标错
+\* 被IPinfo错误标为Hosting的运营商除外，但**只有**少量IP数据库这几行被标错
 
 这种现象又称“**流媒体全解锁**”✅，也是很多用户希望看到、青睐的结果。
 

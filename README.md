@@ -247,7 +247,7 @@ When testing under HK local network (under the ISPs mentioned above⬆️), all 
 - For Stream Restriction Check:
   - All Tests have the 🟢**Green** "**Y**" displayed✅
 
-\* Except the ISP incorrectly labelled as Hosting by IPinfo, where **only** the IPinfo results are incorrect.
+\* Except the ISP incorrectly labelled as Hosting by IPinfo, where **only** some IP database results are incorrect.
 
 ## My Unique Personality
 
