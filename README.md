@@ -2,9 +2,9 @@
 
 ## IP Quality &amp; Streaming Service Regional Restriction Checker (Hong Kong Region Only)
 
-IP位址可信程度&流媒體服務可用性測試程式 (祗限香港地區)
+### IP位址可信程度&流媒體服務可用性測試程式 (祗限香港地區)
 
-IP质量与流媒体平台解锁测试脚本 (仅限香港地区)
+### IP质量与流媒体平台解锁测试脚本 (仅限香港地区)
 
 🌎 **README Language/语言:** English | [繁體中文](./README_zh_HK.md) | [简体中文](./README_zh_CN.md)
 
@@ -20,11 +20,11 @@ This project is for testing whether streaming services can be used (also known a
 
 As a Hong Kong university student🏫 (and semi-local), **only** the nodes in **Hong Kong region** are used and hence only the checkers of that region were developed (Why? See FAQ below⬇️).
 
-<img width="1250" alt="Screenshot 2025-05-05 at 12 32 37 PM" src="https://github.com/user-attachments/assets/951f4a86-3374-432c-8e69-42de00be0bfe" /><br>
+<img width="1250" height="649" alt="440261998-951f4a86-3374-432c-8e69-42de00be0bfe" src="https://github.com/user-attachments/assets/e65b1c55-55d8-43b4-84da-a331a5a83418" /><br>
 
 This was made originally due to an **argument** with the original author about Netflix module, but along with some new features (see below⬇️).
 
-<img width="520" alt="Screenshot 2025-04-16 at 4 59 19 PM" src="https://github.com/user-attachments/assets/c26aaf26-9435-43b9-ac4d-2d7f4b49314c" /><br>
+<img width="520" alt="437650943-c26aaf26-9435-43b9-ac4d-2d7f4b49314c-2" src="https://github.com/user-attachments/assets/d5906271-3cd2-4a88-8549-08715fa1ea77" /><br>
 
 **My Personality:**<br>
 If my suggestion/PR is rejected by a repo, fork (copy) it ASAP and modify it with my unique suggestions for **personal use**.<br>
@@ -64,7 +64,7 @@ Be mindful of the following CAPITAL letters:
 
 |Letters|Meaning|
 |-------|-------|
-|LC|Region Code of the IP Address|
+|LC|Location (Region) Code of the IP Address|
 |SRV|Whether Labelled as a Server / Data Centre|
 |VPN|Whether Labelled as a VPN Server|
 |PXY|Whether Labelled as a Proxy Server|
@@ -89,7 +89,7 @@ Be mindful of the following result letters:
 |Letter|Colour|Result|
 |------|------|------|
 |Y|🟢Green|Yes|
-|N|🔴Red|No (IP Banned)|
+|N|🔴Red|No (IP Banned or Not Available)|
 |E|🔴Red|Network Error, Unable to Test|
 
 ## New Features
@@ -104,7 +104,7 @@ This script adds the following features (improvements) from the reference repo a
 
 YouTube "Sign in to confirm that you're not a bot" Screen:
 
-<img width="700" alt="Screenshot 2025-04-09 at 4 08 59 PM" src="https://github.com/user-attachments/assets/37708650-8917-4ed1-930b-6bc99c37843d" /><br>
+<img width="650" alt="437651374-37708650-8917-4ed1-930b-6bc99c37843d-2" src="https://github.com/user-attachments/assets/cc776b24-daed-4849-941f-cad862315644" /><br>
 
 ## Tech Principles of Testing
 
@@ -214,7 +214,7 @@ Some Residential IP providers may have the following "personality":
 - Block All **Bank** Websites/Apps (including HK and other Banks)
 - Block All **ICP-Registered** Websites/Apps (even if they have servers outside Mainland)
 
-<img width="400" alt="Screenshot 2025-04-26 at 8 23 12 AM" src="https://github.com/user-attachments/assets/2b711d91-c64a-4ae4-bc13-a4b7f5321e31" /><br>
+<img width="400" alt="437651118-2b711d91-c64a-4ae4-bc13-a4b7f5321e31" src="https://github.com/user-attachments/assets/f28d71e8-cf6a-478e-9218-aa8b6a19326b" /><br>
 
 ### Issue: IP Labelled as Mainland by Google
 
@@ -222,17 +222,17 @@ Due to some users in Mainland using Google with Location Services📍 (like GPS)
 
 You will see that all Google and YouTube services will have the "CN" region displayed in the test scripts.
 
-<img width="750" alt="Screenshot 2025-05-05 at 1 36 43 PM" src="https://github.com/user-attachments/assets/e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" /><br>
+<img width="700" alt="440264204-e0febc8b-d2a7-4b0d-bfe7-1866ef77a02c" src="https://github.com/user-attachments/assets/d2526ec5-1c4e-4e70-b362-4083ca0cb906" /><br>
 
 From my test and experiment results, **none**❌ of the HK local networks, including Mobile Data📲, University "eduroam" WiFi🏫 and Free WiFi🛜, appeared to have this result (probability: 0%).
 
 To "pull" an IP address back to HK🔙, keep doing the following for 1 to 30 days⏳ (several times per day):
-1. Connect🔌 to the corresponding node when **physically** in HK
+1. Connect🔌 to the same server when **physically** in HK
 2. Turn on (Allow) Location Services on your device/browser
 3. Search🔍 anything on Google or use Google Maps🧭
 4. After searching/opening, update/report your location📍 at the bottom
 
-Based on my experiment, **two (2)** of the IP addresses previously labelled as Mainland by Google were **successfully** "pulled back"✅ to HK.
+Based on my experiment, **three (3)** of the IP addresses previously labelled as Mainland by Google (plus **one (1)** for Instagram) were **successfully** "pulled back"✅ to HK.
 
 To learn more, please visit: [https://www.tjsky.net/tutorial/546](https://www.tjsky.net/tutorial/546) (just a reference, not my article)
 
